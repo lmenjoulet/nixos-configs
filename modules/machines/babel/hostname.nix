@@ -1,3 +1,3 @@
 {
-  networking.hostname = "babel";
+  networking.hostName = "babel";
 }

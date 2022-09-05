@@ -14,17 +14,13 @@
       gimp-with-plugins
       keepassxc
       libreoffice
-      mpdevil
       neofetch
       texlive.combined.scheme-small
+      strawberry
     ];
   };
 
   services = {
-    mpd = {
-      enable = true;
-      musicDirectory = "/mnt/data_0/Music";
-    };
     syncthing = {
       enable = true;
     };
