@@ -25,6 +25,7 @@
             ./configuration.nix
             home-manager.nixosModules.home-manager
             homeconf
+            ./modules/machines/babel/hostname.nix
           ];
         };
         icare = nixpkgs.lib.nixosSystem {

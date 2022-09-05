@@ -27,7 +27,6 @@
   };
 
   networking = {
-    hostName = "aouh-tour";
     networkmanager.enable = true;
     firewall = {
       allowedTCPPorts = [
