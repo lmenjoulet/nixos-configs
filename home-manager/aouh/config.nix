@@ -15,7 +15,7 @@
       keepassxc
       libreoffice
       neofetch
-      texlive.combined.scheme-small
+      texlive.combined.scheme-medium
       strawberry
     ];
   };
