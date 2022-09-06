@@ -5,9 +5,13 @@
       url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    blender-bin = {
+      url = github:edolstra/nix-warez?dir=blender;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, blender-bin, ... }:
     let
       homeconf = {
         home-manager = {
@@ -16,6 +20,11 @@
           users.aouh = import ./home-manager/aouh/config.nix;
         };
       };
+      blender-overlay = ({ config, pkgs, ... }:
+        {
+          nixpkgs.overlays = [ blender-bin.overlay ];
+          environment.systemPackages = [ pkgs.blender ];
+        });
     in
     {
       nixosConfigurations = {
