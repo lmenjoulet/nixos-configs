@@ -1,7 +1,10 @@
 { pkgs, lib, config, ... }: {
 
   nixpkgs = {
-    config.allowUnfree = true;
+    config = {
+      allowUnfree = true;
+      cudaSupport = true;
+    };
   };
 
   home = {
@@ -171,8 +174,8 @@
         cmp-nvim-lsp
         cmp-spell
         cmp-vsnip
+        emmet-vim
         gruvbox-nvim
-        harpoon
         lualine-lsp-progress
         lualine-nvim
         nvim-autopairs
