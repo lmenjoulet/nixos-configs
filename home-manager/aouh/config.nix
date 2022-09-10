@@ -203,6 +203,18 @@
       ];
     };
 
+    vscode = {
+      enable = true;
+      extensions = with pkgs.vscode-extensions; [
+        vscodevim.vim
+      ];
+      userSettings = {
+        "editor.tabSize" = 2;
+        "editor.insertSpaces" = true;
+        "editor.detectIndentation" = false;
+      };
+    };
+
     tmux = {
       enable = true;
       clock24 = true;
