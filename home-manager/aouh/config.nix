@@ -20,6 +20,8 @@
       neofetch
       texlive.combined.scheme-medium
       strawberry
+      conda
+      nodejs
     ];
   };
 
@@ -211,6 +213,7 @@
         "editor.tabSize" = 2;
         "editor.insertSpaces" = true;
         "editor.detectIndentation" = false;
+        "workbench.colorTheme" = "Gruvbox Dark Medium";
       };
     };
 
