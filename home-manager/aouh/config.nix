@@ -191,14 +191,9 @@
       ];
       extraConfig = "lua << EOF\n" + builtins.readFile ./init.lua + "\nEOF";
       extraPackages = [
-        pkgs.clang-tools
         pkgs.rnix-lsp
-        pkgs.gopls
         pkgs.nodePackages.bash-language-server
-        pkgs.nodePackages.pyright
         pkgs.sumneko-lua-language-server
-        pkgs.nodePackages.vscode-langservers-extracted
-        pkgs.texlab
         pkgs.nodePackages.svelte-language-server
       ];
     };
@@ -206,7 +201,11 @@
     vscode = {
       enable = true;
       extensions = with pkgs.vscode-extensions; [
+        # only cosmetic and interface
         vscodevim.vim
+        mhutchie.git-graph
+        jdinhlife.gruvbox
+        tomoki1207.pdf
       ];
       userSettings = {
         "editor.tabSize" = 2;
