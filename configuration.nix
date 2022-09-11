@@ -70,7 +70,17 @@
     pulseaudio.enable = false;
   };
 
-  security.rtkit.enable = true;
+  security = {
+    rtkit.enable = true;
+    wrappers = {
+      plasma-systemmonitor = {
+        group = "users";
+        owner = "root";
+        capabilities = "cap_net_raw+ep";
+        source = "${pkgs.libsForQt5.plasma-systemmonitor}/bin/plasma-systemmonitor";
+      };
+    };
+  };
 
   systemd.services = {
     NetworkManager-wait-online.enable = false;
@@ -86,14 +96,8 @@
 
     xserver = {
       enable = true;
-      displayManager.lightdm = {
-        enable = true;
-        greeters.slick = {
-          enable = true;
-          draw-user-backgrounds = true;
-        };
-      };
-      desktopManager.cinnamon.enable = true;
+      displayManager.sddm.enable = true;
+      desktopManager.plasma5.enable = true;
       videoDrivers = [ "nvidia" ];
       layout = "fr";
       xkbOptions = "eurosign:e";
@@ -108,24 +112,15 @@
     };
   };
 
-  qt5 = {
-    enable = true;
-    style = lib.mkForce "gtk2";
-    platformTheme = lib.mkForce "gtk2";
-  };
-
   environment = {
     systemPackages = with pkgs; [
-      libsForQt5.qtstyleplugins
+      kde-gtk-config
     ];
-    cinnamon.excludePackages = with pkgs.cinnamon; [
-      pix
-      warpinator
-    ];
+
   };
 
   fonts.fonts = with pkgs; [
-    nerdfonts
+    fira-code
   ];
 
   users = import ./users.nix pkgs;

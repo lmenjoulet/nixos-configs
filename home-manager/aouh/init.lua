@@ -162,10 +162,6 @@ vim.api.nvim_create_autocmd("BufWritePre",
   { pattern = "*", callback = vim.lsp.buf.formatting_sync }
 )
 
---- Auto close html tags
-
-require("nvim-ts-autotag").setup {}
-
 --- Tabs config
 
 require("bufferline").setup {}
@@ -223,15 +219,3 @@ vim.keymap.set("n", "<Leader>fb", require("telescope.builtin").buffers, { norema
 vim.keymap.set("n", "<Leader>ft", require("telescope.builtin").treesitter, { noremap = true })
 vim.keymap.set("n", "<Leader>fe", require("telescope.builtin").diagnostics, { noremap = true })
 vim.keymap.set("n", "<Leader>fs", require("telescope.builtin").lsp_document_symbols, { noremap = true })
-
---- Latex config
-
-vim.api.nvim_create_autocmd(
-  { "BufRead", "BufNewFile" },
-  { pattern = { "*.txt", "*.md", "*.tex" }, command = "setlocal spell spelllang=en_us,fr textwidth=80" }
-)
-
-vim.api.nvim_create_autocmd(
-  "BufWritePost",
-  { pattern = "*.tex", command = "silent !pdflatex %" }
-)
