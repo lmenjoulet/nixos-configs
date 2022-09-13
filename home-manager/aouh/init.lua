@@ -103,17 +103,8 @@ cmp.event:on(
 local lspconfig = require("lspconfig")
 
 local lsp_servers = {
-  "pyright",
   "rnix",
-  "gopls",
-  "clangd",
   "bashls",
-  "html",
-  "cssls",
-  "jsonls",
-  "eslint",
-  "texlab",
-  "svelte"
 }
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -162,13 +153,6 @@ vim.api.nvim_create_autocmd("BufWritePre",
   { pattern = "*", callback = vim.lsp.buf.formatting_sync }
 )
 
---- Tabs config
-
-require("bufferline").setup {}
-
-vim.keymap.set("n", "<Leader>l", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<Leader>h", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
-
 --- Terminal mappings
 
 require("toggleterm").setup {
@@ -185,6 +169,7 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-N>", { noremap = true })
 
 require("lualine").setup({
   options = {
+    icons_enabled = false;
     component_separators = { left = "|", right = "|" },
     section_separators = { left = "", right = "" },
   },

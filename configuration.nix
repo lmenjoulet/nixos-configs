@@ -96,8 +96,14 @@
 
     xserver = {
       enable = true;
-      displayManager.sddm.enable = true;
-      desktopManager.plasma5.enable = true;
+      displayManager.lightdm = {
+        enable = true;
+        greeters.slick = {
+          enable = true;
+          draw-user-backgrounds = true;
+        };
+      };
+      desktopManager.cinnamon.enable = true;
       videoDrivers = [ "nvidia" ];
       layout = "fr";
       xkbOptions = "eurosign:e";
@@ -107,20 +113,28 @@
       enable = true;
       openPeerPorts = true;
       settings = {
-        download-dir = "/mnt/data_0/Torrents";
+        download-dir = "/mnt/data/Torrents";
       };
     };
   };
 
+  qt5 = {
+    enable = true;
+    style = lib.mkForce "gtk2";
+    platformTheme = lib.mkForce "gtk2";
+  };
+
   environment = {
     systemPackages = with pkgs; [
-      kde-gtk-config
+      libsForQt5.qtstyleplugins
+      theme-vertex
     ];
 
   };
 
   fonts.fonts = with pkgs; [
     fira-code
+    noto-fonts
   ];
 
   users = import ./users.nix pkgs;

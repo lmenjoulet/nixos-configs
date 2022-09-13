@@ -26,17 +26,10 @@
       fsType = "vfat";
     };
 
-  fileSystems."/mnt/data_0" =
+  fileSystems."/mnt/data" =
     {
-      device = "/dev/disk/by-uuid/0cb0840a-1974-4216-84b1-9576b8789195";
-      fsType = "ext4";
-      options = [ "x-gvfs-show" ];
-    };
-
-  fileSystems."/mnt/data_1" =
-    {
-      device = "/dev/disk/by-uuid/5cbb1d27-72db-4440-8c7d-3f70c50afc34";
-      fsType = "ext4";
+      device = "/dev/sda";
+      fsType = "btrfs";
       options = [ "x-gvfs-show" ];
     };
 
@@ -47,8 +40,8 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp2s0f0u3.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp11s0f3u2.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

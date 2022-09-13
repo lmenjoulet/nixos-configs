@@ -15,9 +15,11 @@
       ffmpeg
       flacon
       gimp-with-plugins
+      htop
       keepassxc
       libreoffice
       neofetch
+      teams
       texlive.combined.scheme-medium
       strawberry
       conda
@@ -94,7 +96,6 @@
       enable = true;
       plugins = with pkgs.vimPlugins; [
         (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
-        bufferline-nvim
         cmp-buffer
         cmp-cmdline
         cmp-nvim-lsp
@@ -117,7 +118,6 @@
         pkgs.rnix-lsp
         pkgs.nodePackages.bash-language-server
         pkgs.sumneko-lua-language-server
-        pkgs.nodePackages.svelte-language-server
       ];
     };
 
@@ -138,9 +138,10 @@
         "editor.lineNumbers" = "relative";
         "editor.fontFamily" = "Fira Code";
         "editor.cursorSurroundingLines" = 999;
-        #"workbench.colorTheme" = "Gruvbox Dark Medium";
         "workbench.iconTheme" = "vscode-icons";
+        "workbench.colorTheme" = "Gruvbox Dark Hard";
         "svelte.enable-ts-plugin" = true;
+        "vsicons.dontShowNewVersionMessage" = true;
       };
     };
   };
