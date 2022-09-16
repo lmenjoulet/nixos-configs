@@ -128,6 +128,8 @@
     systemPackages = with pkgs; [
       libsForQt5.qtstyleplugins
       theme-vertex
+      iconpack-obsidian
+      moka-icon-theme
     ];
 
   };
