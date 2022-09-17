@@ -22,11 +22,13 @@
         babel = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            ./hardware/babel.nix
             ./configuration.nix
             ./modules/wifi-key-tplink.nix
             ./modules/pipewire.nix
             ./modules/grub.nix
             ./modules/gnome.nix
+            ./users.nix
             home-manager.nixosModules.home-manager
             homeconf
             ({ pkgs, ... }: { networking.hostName = "babel"; })

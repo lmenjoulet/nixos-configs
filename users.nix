@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  users = {
+  users.users = {
     aouh = {
       isNormalUser = true;
       description = "Loup Menjoulet";

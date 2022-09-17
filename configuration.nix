@@ -4,10 +4,6 @@
 
 { config, lib, pkgs, ... }:
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
-
   nix = {
     extraOptions = "experimental-features = nix-command flakes";
     settings = {
@@ -19,6 +15,7 @@
       ];
     };
   };
+
   nixpkgs.config.allowUnfree = true;
   boot = {
     kernelPackages = pkgs.linuxPackages;
@@ -72,8 +69,6 @@
   fonts.fonts = with pkgs; [
     fira-code
   ];
-
-  users = import ./users.nix pkgs;
 
   system.stateVersion = "22.11";
 
