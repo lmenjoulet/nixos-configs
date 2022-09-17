@@ -55,9 +55,6 @@
     printing.enable = true;
 
     xserver = {
-      enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
       videoDrivers = [ "nvidia" ];
       layout = "fr";
       xkbOptions = "eurosign:e";
@@ -70,33 +67,6 @@
         download-dir = "/mnt/data/Torrents";
       };
     };
-  };
-
-  qt5 = {
-    enable = true;
-    style = lib.mkForce "gtk2";
-    platformTheme = lib.mkForce "gtk2";
-  };
-
-  environment = {
-    gnome.excludePackages = (with pkgs; [
-      gnome-photos
-      gnome-tour
-    ]) ++ (with pkgs.gnome; [
-      gnome-music
-      epiphany
-      totem
-      gnome-maps
-      yelp
-      gnome-backgrounds
-    ]);
-
-    systemPackages = with pkgs; [
-      libsForQt5.qtstyleplugins
-      amberol
-      celluloid
-    ];
-
   };
 
   fonts.fonts = with pkgs; [
