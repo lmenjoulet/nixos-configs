@@ -22,15 +22,15 @@
         babel = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            (import ./modules/transmission.nix { download-dir = "/mnt/data/Torrents"; })
-            ./configuration.nix
             ./hardware/babel.nix
-            ./modules/cuda.nix
-            ./modules/gnome.nix
-            ./modules/grub.nix
-            ./modules/nvidia.nix
-            ./modules/pipewire.nix
+            ./configuration.nix
             ./modules/wifi-key-tplink.nix
+            ./modules/pipewire.nix
+            ./modules/grub.nix
+            ./modules/gnome.nix
+            ./modules/cuda.nix
+            ./modules/nvidia.nix
+            (import ./modules/transmission.nix { download-dir = "/mnt/data/Torrents"; })
             ./users.nix
             home-manager.nixosModules.home-manager
             homeconf

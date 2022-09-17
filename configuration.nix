@@ -18,23 +18,12 @@
   i18n.defaultLocale = "fr_FR.UTF-8";
   console.keyMap = "fr";
   zramSwap.enable = true;
-  hardware = {
-    opengl = {
-      enable = true;
-      extraPackages = with pkgs; [
-        vaapiVdpau
-        libvdpau-va-gl
-      ];
-      setLdLibraryPath = true;
-    };
-  };
   systemd.services = {
     NetworkManager-wait-online.enable = false;
   };
   services = {
     printing.enable = true;
     xserver = {
-      videoDrivers = [ "nvidia" ];
       layout = "fr";
       xkbOptions = "eurosign:e";
     };
