@@ -22,17 +22,6 @@
   nixpkgs.config.allowUnfree = true;
   boot = {
     kernelPackages = pkgs.linuxPackages;
-    loader = {
-      grub = {
-        enable = true;
-        efiSupport = true;
-        devices = [ "nodev" ];
-        gfxmodeEfi = "1920x1080";
-      };
-      efi = {
-        canTouchEfiVariables = true;
-      };
-    };
   };
 
   networking = {

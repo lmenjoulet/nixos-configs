@@ -25,6 +25,7 @@
             ./configuration.nix
             ./modules/wifi-key-tplink.nix
             ./modules/pipewire.nix
+            ./modules/grub.nix
             home-manager.nixosModules.home-manager
             homeconf
             ({ pkgs, ... }: { networking.hostName = "babel"; })
