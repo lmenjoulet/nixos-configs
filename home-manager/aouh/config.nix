@@ -10,6 +10,7 @@
   home = {
     stateVersion = "22.11";
     packages = with pkgs; [
+      amberol
       blender
       ciscoPacketTracer8
       ffmpeg
@@ -19,9 +20,7 @@
       keepassxc
       libreoffice
       neofetch
-      teams
       texlive.combined.scheme-medium
-      strawberry
       conda
       nodejs
     ];
@@ -57,7 +56,7 @@
     firefox = {
       enable = true;
       package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
-        #forceWayland = true;
+        forceWayland = true;
         extraPolicies = {
           CaptivePortal = false;
           DisableFirefoxStudies = true;

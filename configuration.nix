@@ -72,14 +72,6 @@
 
   security = {
     rtkit.enable = true;
-    wrappers = {
-      plasma-systemmonitor = {
-        group = "users";
-        owner = "root";
-        capabilities = "cap_net_raw+ep";
-        source = "${pkgs.libsForQt5.plasma-systemmonitor}/bin/plasma-systemmonitor";
-      };
-    };
   };
 
   systemd.services = {
@@ -96,14 +88,8 @@
 
     xserver = {
       enable = true;
-      displayManager.lightdm = {
-        enable = true;
-        greeters.slick = {
-          enable = true;
-          draw-user-backgrounds = true;
-        };
-      };
-      desktopManager.cinnamon.enable = true;
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
       videoDrivers = [ "nvidia" ];
       layout = "fr";
       xkbOptions = "eurosign:e";
@@ -125,18 +111,28 @@
   };
 
   environment = {
+    gnome.excludePackages = (with pkgs; [
+      gnome-photos
+      gnome-tour
+    ]) ++ (with pkgs.gnome; [
+      gnome-music
+      epiphany
+      totem
+      gnome-maps
+      yelp
+      gnome-backgrounds
+    ]);
+
     systemPackages = with pkgs; [
       libsForQt5.qtstyleplugins
-      theme-vertex
-      iconpack-obsidian
-      moka-icon-theme
+      amberol
+      celluloid
     ];
 
   };
 
   fonts.fonts = with pkgs; [
     fira-code
-    noto-fonts
   ];
 
   users = import ./users.nix pkgs;
