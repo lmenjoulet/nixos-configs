@@ -1,4 +1,4 @@
-{ pkgs, download-dir, ... }: {
+{ download-dir, ... }: {
   services.transmission = {
     enable = true;
     openPeerPorts = true;

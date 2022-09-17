@@ -28,22 +28,26 @@
             ./modules/pipewire.nix
             ./modules/grub.nix
             ./modules/gnome.nix
-            (./modules/transmission.nix "/mnt/data/Torrents")
+            ./modules/cuda.nix
+            (import ./modules/transmission.nix { download-dir = "/mnt/data/Torrents"; })
             ./users.nix
             home-manager.nixosModules.home-manager
             homeconf
-            ({ pkgs, ... }: { networking.hostName = "babel"; })
+            ({ pkgs, ... }: {
+              networking.hostName = "babel";
+            })
           ];
         };
-        icare = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./configuration.nix
-            home-manager.nixosModules.home-manager
-            homeconf
-            ({ pkgs, ... }: { networking.hostName = "icare"; })
-          ];
-        };
+        icare = nixpkgs.lib.nixosSystem
+          {
+            system = "x86_64-linux";
+            modules = [
+              ./configuration.nix
+              home-manager.nixosModules.home-manager
+              homeconf
+              ({ pkgs, ... }: { networking.hostName = "icare"; })
+            ];
+          };
       };
     };
 }
