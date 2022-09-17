@@ -15,24 +15,17 @@
       ];
     };
   };
-
   nixpkgs.config.allowUnfree = true;
   boot = {
     kernelPackages = pkgs.linuxPackages;
   };
-
   networking = {
     networkmanager.enable = true;
   };
-
   time.timeZone = "Europe/Paris";
-
   i18n.defaultLocale = "fr_FR.UTF-8";
-
   console.keyMap = "fr";
-
   zramSwap.enable = true;
-
   hardware = {
     opengl = {
       enable = true;
@@ -43,20 +36,16 @@
       setLdLibraryPath = true;
     };
   };
-
   systemd.services = {
     NetworkManager-wait-online.enable = false;
   };
-
   services = {
     printing.enable = true;
-
     xserver = {
       videoDrivers = [ "nvidia" ];
       layout = "fr";
       xkbOptions = "eurosign:e";
     };
-
     transmission = {
       enable = true;
       openPeerPorts = true;
@@ -65,11 +54,9 @@
       };
     };
   };
-
   fonts.fonts = with pkgs; [
     fira-code
   ];
-
   system.stateVersion = "22.11";
 
 }

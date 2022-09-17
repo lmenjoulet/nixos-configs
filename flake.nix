@@ -28,6 +28,7 @@
             ./modules/pipewire.nix
             ./modules/grub.nix
             ./modules/gnome.nix
+            (./modules/transmission.nix "/mnt/data/Torrents")
             ./users.nix
             home-manager.nixosModules.home-manager
             homeconf
