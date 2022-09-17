@@ -24,6 +24,7 @@
           modules = [
             ./configuration.nix
             ./modules/wifi-key-tplink.nix
+            ./modules/pipewire.nix
             home-manager.nixosModules.home-manager
             homeconf
             ({ pkgs, ... }: { networking.hostName = "babel"; })

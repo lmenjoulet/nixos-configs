@@ -30,7 +30,6 @@
     {
       device = "/dev/sda";
       fsType = "btrfs";
-      options = [ "x-gvfs-show" ];
     };
 
   swapDevices = [ ];

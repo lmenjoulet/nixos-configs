@@ -21,8 +21,6 @@
   };
   nixpkgs.config.allowUnfree = true;
   boot = {
-    blacklistedKernelModules = [ "rtl8xxxu" ];
-    extraModulePackages = [ config.boot.kernelPackages.rtl8192eu ];
     kernelPackages = pkgs.linuxPackages;
     loader = {
       grub = {
@@ -39,15 +37,6 @@
 
   networking = {
     networkmanager.enable = true;
-    firewall = {
-      allowedTCPPorts = [
-        22000
-      ];
-      allowedUDPPorts = [
-        22000
-        21027
-      ];
-    };
   };
 
   time.timeZone = "Europe/Paris";
@@ -67,11 +56,6 @@
       ];
       setLdLibraryPath = true;
     };
-    pulseaudio.enable = false;
-  };
-
-  security = {
-    rtkit.enable = true;
   };
 
   systemd.services = {
@@ -80,11 +64,6 @@
 
   services = {
     printing.enable = true;
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      pulse.enable = true;
-    };
 
     xserver = {
       enable = true;
