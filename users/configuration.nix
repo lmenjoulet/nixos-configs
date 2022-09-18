@@ -5,25 +5,23 @@ let
   );
 in
 {
-  users.users = builtins.map (
-    builtins.listToAttrs (
-      builtins.map
-        (user: { name = user; value = (import (./. + "/${user}/user.nix")); })
-        userlist
-    )
+  users.users = builtins.listToAttrs (
+    builtins.map
+      (user: { name = user; value = (import (./. + "/${user}/user.nix")); })
+      userList
   );
 
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.aouh = import ./home-manager/aouh/config.nix;
-    users = builtins.map
-      (
-        builtins.listToAttrs (
-          builtins.map
-            (user: { name = user; value = (import (./. + "/${user}/home-manager.nix")); })
-            userlist
-        )
-      );
+
+    users = builtins.listToAttrs (
+      builtins.map
+        (user: {
+          name = user;
+          value = import (./. + "/${user}/home-manager.nix");
+        })
+        userList
+    );
   };
 }

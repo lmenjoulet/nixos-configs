@@ -40,7 +40,6 @@
             modules = [
               ./configuration.nix
               home-manager.nixosModules.home-manager
-              homeconf
               ({ pkgs, ... }: { networking.hostName = "icare"; })
             ];
           };
