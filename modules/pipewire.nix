@@ -6,6 +6,7 @@
       enable = true;
       support32Bit = true;
     };
+    pulse.enable = true;
   };
   hardware.pulseaudio.enable = false;
 }

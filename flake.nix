@@ -5,18 +5,13 @@
       url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    blender-bin = {
+      url = github:edolstra/nix-warez?dir=blender;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }:
-    let
-      homeconf = {
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          users.aouh = import ./home-manager/aouh/config.nix;
-        };
-      };
-    in
+  outputs = inputs@{ nixpkgs, home-manager, blender-bin, ... }:
     {
       nixosConfigurations = {
         babel = nixpkgs.lib.nixosSystem {
@@ -31,11 +26,11 @@
             ./modules/nvidia.nix
             ./modules/pipewire.nix
             ./modules/wifi-key-tplink.nix
-            ./users.nix
+            ./users/configuration.nix
             home-manager.nixosModules.home-manager
-            homeconf
-            ({ pkgs, ... }: {
+            ({ config, pkgs, ... }: {
               networking.hostName = "babel";
+              nixpkgs.overlays = [ blender-bin.overlays.default ];
             })
           ];
         };

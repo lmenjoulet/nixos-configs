@@ -8,9 +8,7 @@
     extraOptions = "experimental-features = nix-command flakes";
   };
   nixpkgs.config.allowUnfree = true;
-  boot = {
-    kernelPackages = pkgs.linuxPackages;
-  };
+
   networking = {
     networkmanager.enable = true;
   };

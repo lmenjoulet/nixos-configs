@@ -3,6 +3,7 @@
     xserver = {
       enable = true;
       displayManager.gdm.enable = true;
+      displayManager.gdm.wayland = lib.mkForce true;
       desktopManager.gnome.enable = true;
     };
   };

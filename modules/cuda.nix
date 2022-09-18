@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   nix = {
     settings = {
       substituters = [
@@ -13,7 +13,6 @@
   hardware.opengl.setLdLibraryPath = true;
   environment.systemPackages = with pkgs; [
     cudatoolkit
-    #cudaPackages.cudnn
   ];
 }
 
