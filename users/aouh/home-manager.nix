@@ -9,6 +9,7 @@
 
   home = {
     stateVersion = "22.11";
+
     packages = with pkgs; [
       amberol
       blender_3_3
@@ -33,6 +34,14 @@
   };
 
   programs = {
+
+    bash = {
+      enable = true;
+      sessionVariables = {
+        EDITOR = "nvim";
+      };
+    };
+
     beets = {
       enable = true;
       settings = {
@@ -102,9 +111,11 @@
         cmp-nvim-lsp
         cmp-spell
         cmp-vsnip
+        gitsigns-nvim
         gruvbox-nvim
         lualine-lsp-progress
         lualine-nvim
+        neogit
         nvim-autopairs
         nvim-cmp
         nvim-lspconfig

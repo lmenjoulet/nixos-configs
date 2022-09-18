@@ -1,6 +1,5 @@
 -- options
 
-vim.o.mouse = "a"
 vim.o.hidden = true
 vim.o.number = true
 vim.opt.termguicolors = true
@@ -186,7 +185,6 @@ require("lualine").setup({
 require("telescope").setup {
   defaults = {
     initial_mode = "normal",
-    sort_lastused = true,
     file_ignore_patterns = { ".git/", "node_modules/" },
   },
   pickers = {
@@ -204,3 +202,16 @@ vim.keymap.set("n", "<Leader>fb", require("telescope.builtin").buffers, { norema
 vim.keymap.set("n", "<Leader>ft", require("telescope.builtin").treesitter, { noremap = true })
 vim.keymap.set("n", "<Leader>fe", require("telescope.builtin").diagnostics, { noremap = true })
 vim.keymap.set("n", "<Leader>fs", require("telescope.builtin").lsp_document_symbols, { noremap = true })
+
+
+-- Gitsigns
+
+require('gitsigns').setup {}
+
+-- Neogit
+
+require('neogit').setup {}
+
+vim.keymap.set("n", "<Leader>gc", function()
+  require('neogit').open({ "commit" })
+end, { noremap = true })
