@@ -21,6 +21,7 @@
       keepassxc
       libreoffice
       neofetch
+      signal-desktop
       texlive.combined.scheme-medium
       conda
       nodejs
