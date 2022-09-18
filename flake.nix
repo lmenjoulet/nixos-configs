@@ -44,9 +44,13 @@
               ./modules/gnome.nix
               ./modules/grub.nix
               ./modules/nvidia-offload.nix
-              ./modules/nvidia-offload.nix
+	      ./modules/pipewire.nix
+	      ./users/configuration.nix
               home-manager.nixosModules.home-manager
-              ({ pkgs, ... }: { networking.hostName = "icare"; })
+              ({ pkgs, ... }: {
+                networking.hostName = "icare";
+                nixpkgs.overlays = [ blender-bin.overlays.default ];
+              })
             ];
           };
       };

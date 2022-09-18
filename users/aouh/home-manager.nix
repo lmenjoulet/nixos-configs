@@ -89,6 +89,8 @@
       userName = "lmenjoulet";
     };
 
+    gh.enable = true;
+
     go.enable = true;
 
     neovim = {
