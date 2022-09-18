@@ -31,6 +31,7 @@
       amberol
       celluloid
       gnome.gnome-tweaks
+      ffmpegthumbnailer
     ];
 
   };

@@ -39,6 +39,12 @@
             system = "x86_64-linux";
             modules = [
               ./configuration.nix
+              ./hardware/icare.nix
+              ./modules/cuda.nix
+              ./modules/gnome.nix
+              ./modules/grub.nix
+              ./modules/nvidia-offload.nix
+              ./modules/nvidia-offload.nix
               home-manager.nixosModules.home-manager
               ({ pkgs, ... }: { networking.hostName = "icare"; })
             ];
