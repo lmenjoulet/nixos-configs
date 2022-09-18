@@ -206,16 +206,15 @@ vim.keymap.set("n", "<Leader>fs", require("telescope.builtin").lsp_document_symb
 
 -- Gitsigns
 
-require('gitsigns').setup {}
+require('gitsigns').setup {
+  current_line_blame = true;
+  current_line_blame_opts = {
+    delay = 400,
+  },
+}
 
 -- Neogit
 
 require('neogit').setup {}
 
-vim.keymap.set("n", "<Leader>gc", function()
-  require('neogit').open({ "commit" })
-end, { noremap = true })
-
-vim.keymap.set("n", "<Leader>gv", function()
-  require('neogit').open()
-end, { noremap = true })
+vim.keymap.set("n", "<Leader>g", function() require('neogit').open() end, { noremap = true })
