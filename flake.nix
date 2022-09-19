@@ -34,25 +34,25 @@
             })
           ];
         };
-        icare = nixpkgs.lib.nixosSystem
-          {
-            system = "x86_64-linux";
-            modules = [
-              ./configuration.nix
-              ./hardware/icare.nix
-              ./modules/cuda.nix
-              ./modules/gnome.nix
-              ./modules/grub.nix
-              ./modules/nvidia-offload.nix
-	      ./modules/pipewire.nix
-	      ./users/configuration.nix
-              home-manager.nixosModules.home-manager
-              ({ pkgs, ... }: {
-                networking.hostName = "icare";
-                nixpkgs.overlays = [ blender-bin.overlays.default ];
-              })
-            ];
-          };
+        icare = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            (import ./modules/transmission.nix { download-dir = "/mnt/data/Torrents"; })
+            ./configuration.nix
+            ./hardware/icare.nix
+            ./modules/cuda.nix
+            ./modules/gnome.nix
+            ./modules/grub.nix
+            ./modules/nvidia-offload.nix
+            ./modules/pipewire.nix
+            ./users/configuration.nix
+            home-manager.nixosModules.home-manager
+            ({ pkgs, ... }: {
+              networking.hostName = "icare";
+              nixpkgs.overlays = [ blender-bin.overlays.default ];
+            })
+          ];
+        };
       };
     };
 }

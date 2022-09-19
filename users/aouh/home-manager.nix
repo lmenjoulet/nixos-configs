@@ -47,8 +47,8 @@
       enable = true;
       settings = {
         plugins = "inline fetchart embedart lyrics convert";
-        library = "/mnt/data/Music/beets_library.db";
-        directory = "/mnt/data/Music";
+        library = "/mnt/data/Musique/beets_library.db";
+        directory = "/mnt/data/Musique";
         import = {
           write = true;
           copy = true;
