@@ -12,27 +12,43 @@
   };
 
   outputs = inputs@{ nixpkgs, home-manager, blender-bin, ... }:
+    let
+      profiles = {
+        common-basic = # you just need it 
+          [
+            ./configuration.nix
+            ./modules/grub.nix
+          ];
+        common-desktop = # needs to be combined with a desktop environment to be functional
+          [
+            ./modules/pipewire.nix
+            ./users/configuration.nix
+          ];
+        nvidia = [
+          ./modules/nvidia.nix
+          ./modules/cuda.nix
+        ];
+      };
+    in
     {
       nixosConfigurations = {
         babel = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             (import ./modules/transmission.nix { download-dir = "/mnt/data/Torrents"; })
-            ./configuration.nix
             ./hardware/babel.nix
-            ./modules/cuda.nix
             ./modules/gnome.nix
-            ./modules/grub.nix
-            ./modules/nvidia.nix
-            ./modules/pipewire.nix
+            ./modules/steam.nix
             ./modules/wifi-key-tplink.nix
-            ./users/configuration.nix
             home-manager.nixosModules.home-manager
             ({ config, pkgs, ... }: {
               networking.hostName = "babel";
               nixpkgs.overlays = [ blender-bin.overlays.default ];
             })
-          ];
+          ]
+          ++ profiles.common-basic
+          ++ profiles.common-desktop
+          ++ profiles.nvidia;
         };
         icare = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";

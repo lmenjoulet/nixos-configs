@@ -11,7 +11,6 @@
     stateVersion = "22.11";
 
     packages = with pkgs; [
-      amberol
       blender_3_3
       ciscoPacketTracer8
       ffmpeg
