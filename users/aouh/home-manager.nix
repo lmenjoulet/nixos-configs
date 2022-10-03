@@ -115,7 +115,7 @@
         gruvbox-nvim
         lualine-lsp-progress
         lualine-nvim
-        neogit
+        #neogit
         nvim-autopairs
         nvim-cmp
         nvim-lspconfig
@@ -130,6 +130,7 @@
         pkgs.rnix-lsp
         pkgs.nodePackages.bash-language-server
         pkgs.sumneko-lua-language-server
+        pkgs.texlab
       ];
     };
 

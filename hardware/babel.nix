@@ -33,7 +33,18 @@
     };
 
   swapDevices = [ ];
-
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware = {
+    nvidia.modesetting.enable = true;
+    opengl = {
+      enable = true;
+      extraPackages = with pkgs; [
+        vaapiVdpau
+        libvdpau-va-gl
+        libva-utils
+      ];
+    };
+  };
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction

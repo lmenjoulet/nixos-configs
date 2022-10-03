@@ -11,9 +11,14 @@
     };
   };
   environment.systemPackages = with pkgs; [
-    kalendar
-    kmail
+    libsForQt5.kalendar
+    libsForQt5.kmail
     strawberry
     vlc
+    libsForQt5.kdepim-addons
+    libsForQt5.kdepim-runtime
+    libsForQt5.ark
+    libsForQt5.kclock
+    libsForQt5.kcalc
   ];
 }

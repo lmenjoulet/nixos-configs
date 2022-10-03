@@ -104,6 +104,7 @@ local lspconfig = require("lspconfig")
 local lsp_servers = {
   "rnix",
   "bashls",
+  "texlab"
 }
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -214,7 +215,8 @@ require('gitsigns').setup {
 }
 
 -- Neogit
-
+--[[
 require('neogit').setup {}
 
 vim.keymap.set("n", "<Leader>g", function() require('neogit').open() end, { noremap = true })
+]]

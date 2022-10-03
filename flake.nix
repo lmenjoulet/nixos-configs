@@ -24,10 +24,6 @@
             ./modules/pipewire.nix
             ./users/configuration.nix
           ];
-        nvidia = [
-          ./modules/nvidia.nix
-          ./modules/cuda.nix
-        ];
       };
     in
     {
@@ -36,8 +32,9 @@
           system = "x86_64-linux";
           modules = [
             (import ./modules/transmission.nix { download-dir = "/mnt/data/Torrents"; })
+            ./modules/cuda.nix
             ./hardware/babel.nix
-            ./modules/gnome.nix
+            ./modules/kde.nix
             ./modules/steam.nix
             ./modules/wifi-key-tplink.nix
             home-manager.nixosModules.home-manager
@@ -47,8 +44,7 @@
             })
           ]
           ++ profiles.common-basic
-          ++ profiles.common-desktop
-          ++ profiles.nvidia;
+          ++ profiles.common-desktop;
         };
         icare = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
