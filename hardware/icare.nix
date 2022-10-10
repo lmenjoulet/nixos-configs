@@ -16,8 +16,8 @@
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/5e2bcabd-7e7c-4923-9939-efab698330fe";
-      fsType = "xfs";
+      device = "/dev/disk/by-uuid/e99254d3-959d-45f9-bedc-c41802b084ab";
+      fsType = "ext4";
       options = [
         "noatime"
       ];
@@ -25,17 +25,8 @@
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/C6FA-8F11";
+      device = "/dev/disk/by-uuid/5CF3-B726";
       fsType = "vfat";
-    };
-
-  fileSystems."/mnt/data" =
-    {
-      device = "/dev/disk/by-uuid/e184209d-1811-4700-b9f7-11870c1ad474";
-      fsType = "ext4";
-      options = [
-        "x-gvfs-show"
-      ];
     };
 
   swapDevices = [ ];
