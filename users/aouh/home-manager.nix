@@ -22,8 +22,8 @@
       neofetch
       signal-desktop
       texlive.combined.scheme-medium
+      transmission-gtk
       conda
-      nodejs
     ];
   };
 
@@ -106,24 +106,17 @@
       enable = true;
       plugins = with pkgs.vimPlugins; [
         (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
-        cmp-buffer
-        cmp-cmdline
-        cmp-nvim-lsp
-        cmp-spell
-        cmp-vsnip
+        coq_nvim
+        coq-artifacts
         gitsigns-nvim
         gruvbox-nvim
         lualine-lsp-progress
         lualine-nvim
-        #neogit
         nvim-autopairs
-        nvim-cmp
         nvim-lspconfig
         plenary-nvim
         telescope-nvim
         toggleterm-nvim
-        vim-easy-align
-        vim-vsnip
       ];
       extraConfig = "lua << EOF\n" + builtins.readFile ./init.lua + "\nEOF";
       extraPackages = [

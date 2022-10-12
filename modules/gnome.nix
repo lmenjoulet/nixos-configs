@@ -30,6 +30,7 @@
       libsForQt5.qtstyleplugins
       amberol
       celluloid
+      gnome-firmware
       gnome.gnome-tweaks
       ffmpegthumbnailer
     ];

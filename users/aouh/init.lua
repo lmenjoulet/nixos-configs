@@ -1,133 +1,101 @@
--- options
+vim.g.mapleader = [[;]]
+vim.o.number = true -- show line number
+vim.opt.termguicolors = true -- better colors
+vim.o.tabstop = 2 -- tab size 2
+vim.o.shiftwidth = 0 -- indent size
+vim.o.expandtab = true -- convert tab to spaces
+vim.o.cursorline = true -- hightlight the line where the cursor is
+vim.o.splitright = true -- open new buffer right half of the terminal
+vim.o.scrolloff = 999 -- center cursor
+vim.o.relativenumber = true -- show relative line number
 
-vim.o.hidden = true
-vim.o.number = true
-vim.opt.termguicolors = true
-vim.o.tabstop = 2
-vim.o.shiftwidth = 0
-vim.o.expandtab = true
-vim.o.cursorline = true
-vim.o.splitright = true
-vim.o.signcolumn = "yes"
-vim.o.conceallevel = 2
-vim.o.concealcursor = "nc"
-vim.o.updatetime = 300
-vim.opt.shortmess:append({ c = true })
-vim.o.scrolloff = 999
-vim.o.relativenumber = true
-vim.g.mapleader = ";"
-vim.o.pumheight = 10;
+vim.o.background = [[dark]] -- self explanatory
+vim.cmd([[colorscheme gruvbox]]) -- self explanatory
 
---- color scheme
-
-vim.o.background = "dark"
-vim.cmd("colorscheme gruvbox")
-
-require("gruvbox").setup {
-  contrast = "hard",
+require([[nvim-treesitter.configs]]).setup {
+  highlight = {
+    enable = true;
+  };
 }
 
---- TreeSitter
-
-require("nvim-treesitter.configs").setup({
-  highlight = {
-    enable = true,
+require([[telescope]]).setup {
+  defaults = {
+    initial_mode = [[normal]],
+    file_ignore_patterns = { [[.git/]], [[node_modules/]] },
   },
-})
+  pickers = {
+    find_files = {
+      hidden = true,
+      initial_mode = [[insert]],
+    }
+  }
+}
 
+vim.keymap.set("n", "<Leader>ff", require("telescope.builtin").find_files, { noremap = true })
+vim.keymap.set("n", "<Leader>fo", require("telescope.builtin").oldfiles, { noremap = true })
+vim.keymap.set("n", "<Leader>fb", require("telescope.builtin").buffers, { noremap = true })
+vim.keymap.set("n", "<Leader>ft", require("telescope.builtin").treesitter, { noremap = true })
 
---- lsp config
-
-local on_attach = function(_, bufnr)
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
-
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-end
-
-local cmp = require "cmp"
-
-cmp.setup({
-  completion = {
-    completeopt = 'menu, menuone, noinsert'
+require([[gitsigns]]).setup {
+  current_line_blame = true;
+  current_line_blame_opts = {
+    delay = 400,
   },
-  snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
-    end,
+}
+
+require([[nvim-autopairs]]).setup {
+  ignored_next_char = "[^%s%]%)%}]"
+}
+
+require([[toggleterm]]).setup {
+  open_mapping = [[<Leader>t]],
+  hide_numbers = true,
+  start_in_insert = true,
+  direction = [[float]],
+}
+
+require("lualine").setup({
+  options = {
+    icons_enabled = false;
+    component_separators = { left = "|", right = "|" },
+    section_separators = { left = "", right = "" },
   },
-  mapping = cmp.mapping.preset.insert({
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.abort(),
-    ["<Enter>"] = cmp.mapping.confirm({ select = true }),
-    ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-  }),
-  sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-    { name = "vsnip" },
-    { name = "buffer" }
-  }),
-  preselect = cmp.PreselectMode.None,
-})
-
-cmp.setup.filetype("gitcommit", {
-  sources = cmp.config.sources({
-    { name = "cmp_git" },
-  })
-})
-
-cmp.setup.cmdline("/", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = "buffer" }
+  sections = {
+    lualine_c = { "lsp_progress" }
+  },
+  inactive_sections = {
+    lualine_c = {}
   }
 })
-
-cmp.setup.cmdline(":", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = "path" },
-    { name = "cmdline" }
-  })
-})
-
-require("nvim-autopairs").setup {}
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-cmp.event:on(
-  "confirm_done",
-  cmp_autopairs.on_confirm_done()
-)
-
-local lspconfig = require("lspconfig")
 
 local lsp_servers = {
-  "rnix",
-  "bashls",
-  "texlab"
+  [[texlab]],
+  [[sumneko_lua]]
 }
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+vim.g.coq_settings = {
+  auto_start = [[shut-up]],
+  display = {
+    icons = {
+      mode = [[none]]
+    }
+  },
+  xdg = true
+}
 
-for _, lang in pairs(lsp_servers) do
-  lspconfig[lang].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
+local lspconfig = require([[lspconfig]])
+local coq = require([[coq]])
+
+for _, lsp_server in pairs(lsp_servers) do
+  lspconfig[lsp_server].setup(
+    coq.lsp_ensure_capabilities()
+  )
 end
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = true,
-  signs = true,
-  update_in_insert = true,
-})
 
 lspconfig.sumneko_lua.setup {
   root_dir = function()
     return vim.loop.cwd()
   end,
-  on_attach = on_attach,
   settings = {
     Lua = {
       runtime = {
@@ -147,76 +115,29 @@ lspconfig.sumneko_lua.setup {
   }
 }
 
--- autoformat
-
-vim.api.nvim_create_autocmd("BufWritePre",
-  { pattern = "*", callback = vim.lsp.buf.formatting_sync }
-)
-
---- Terminal mappings
-
-require("toggleterm").setup {
-  open_mapping = "<Leader>t",
-  hide_numbers = true,
-  start_in_insert = true,
-  direction = "float",
-  shade_terminals = false,
-}
-
-vim.keymap.set("t", "<Esc>", "<C-\\><C-N>", { noremap = true })
-
---- Line
-
-require("lualine").setup({
-  options = {
-    icons_enabled = false;
-    component_separators = { left = "|", right = "|" },
-    section_separators = { left = "", right = "" },
-  },
-  sections = {
-    lualine_c = { "lsp_progress" }
-  },
-  inactive_sections = {
-    lualine_c = {}
-  }
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+  virtual_text = true,
+  signs = true,
+  update_in_insert = true,
 })
 
---- Telescope
+-- format on save
 
-require("telescope").setup {
-  defaults = {
-    initial_mode = "normal",
-    file_ignore_patterns = { ".git/", "node_modules/" },
-  },
-  pickers = {
-    find_files = {
-      hidden = true,
-      initial_mode = "insert",
-    }
+vim.api.nvim_create_autocmd(
+  "BufWritePre",
+  {
+    pattern = "*",
+    callback = vim.lsp.buf.formatting_sync
   }
+)
 
-}
+-- spell checking and length wrapping for text files
 
-vim.keymap.set("n", "<Leader>ff", require("telescope.builtin").find_files, { noremap = true })
-vim.keymap.set("n", "<Leader>fo", require("telescope.builtin").oldfiles, { noremap = true })
-vim.keymap.set("n", "<Leader>fb", require("telescope.builtin").buffers, { noremap = true })
-vim.keymap.set("n", "<Leader>ft", require("telescope.builtin").treesitter, { noremap = true })
-vim.keymap.set("n", "<Leader>fe", require("telescope.builtin").diagnostics, { noremap = true })
-vim.keymap.set("n", "<Leader>fs", require("telescope.builtin").lsp_document_symbols, { noremap = true })
-
-
--- Gitsigns
-
-require('gitsigns').setup {
-  current_line_blame = true;
-  current_line_blame_opts = {
-    delay = 400,
-  },
-}
-
--- Neogit
---[[
-require('neogit').setup {}
-
-vim.keymap.set("n", "<Leader>g", function() require('neogit').open() end, { noremap = true })
-]]
+vim.api.nvim_create_autocmd(
+  "BufEnter",
+  {
+    pattern = { "*.txt", "*.tex", "*.md" },
+    command = [[set spell spelllang=en_us,fr tw=80 fo+=t fo-=l]]
+  }
+)

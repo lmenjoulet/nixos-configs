@@ -14,15 +14,14 @@
   outputs = inputs@{ nixpkgs, home-manager, blender-bin, ... }:
     let
       profiles = {
-        common-basic = # you just need it 
+        common-basic =
           [
             ./configuration.nix
             ./modules/grub.nix
-          ];
-        common-desktop = # needs to be combined with a desktop environment to be functional
-          [
+            ./modules/security.nix
             ./modules/pipewire.nix
             ./users/configuration.nix
+            home-manager.nixosModules.home-manager
           ];
       };
     in
@@ -37,33 +36,26 @@
             ./modules/kde.nix
             ./modules/steam.nix
             ./modules/wifi-key-tplink.nix
-            home-manager.nixosModules.home-manager
             ({ config, pkgs, ... }: {
               networking.hostName = "babel";
               nixpkgs.overlays = [ blender-bin.overlays.default ];
             })
           ]
-          ++ profiles.common-basic
-          ++ profiles.common-desktop;
+          ++ profiles.common-basic;
         };
         icare = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            (import ./modules/transmission.nix { download-dir = "/mnt/data/Torrents"; })
-            ./configuration.nix
+            ./modules/transmission.nix
             ./hardware/icare.nix
             ./modules/cuda.nix
             ./modules/gnome.nix
-            ./modules/grub.nix
             ./modules/nvidia-offload.nix
-            ./modules/pipewire.nix
-            ./users/configuration.nix
-            home-manager.nixosModules.home-manager
             ({ pkgs, ... }: {
               networking.hostName = "icare";
               nixpkgs.overlays = [ blender-bin.overlays.default ];
             })
-          ];
+          ] ++ profiles.common-basic;
         };
       };
     };
