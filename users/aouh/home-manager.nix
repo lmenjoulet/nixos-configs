@@ -12,7 +12,7 @@
 
     packages = with pkgs; [
       blender_3_3
-      ciscoPacketTracer8
+      #ciscoPacketTracer8
       ffmpeg
       flacon
       gimp-with-plugins

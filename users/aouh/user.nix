@@ -1,4 +1,5 @@
 {
+  initialPassword = "plschange";
   isNormalUser = true;
   description = "Loup Menjoulet";
   homeMode = "770";
