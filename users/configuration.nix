@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 let
   userList = builtins.attrNames (
     lib.filterAttrs (key: val: val == "directory") (builtins.readDir ./.)
@@ -11,17 +11,32 @@ in
       userList
   );
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
+  home-manager =
+    let
+      gnomeExtensions =
+        if config.services.xserver.desktopManager.gnome.enable
+        then
+          {
+            dconf.settings."org/gnome/shell".enabled-extensions = builtins.map (x: x.extensionUuid) (import ../modules/gnome-extensions.nix pkgs);
+          }
+        else
+          { };
+    in
+    {
+      useGlobalPkgs = true;
+      useUserPackages = true;
 
-    users = builtins.listToAttrs (
-      builtins.map
-        (user: {
-          name = user;
-          value = import (./. + "/${user}/home-manager.nix");
-        })
-        userList
-    );
-  };
+      users = builtins.listToAttrs
+        (
+          builtins.map
+            (user: {
+              name = user;
+              value = lib.mkMerge [
+                (import (./. + "/${user}/home-manager.nix"))
+                gnomeExtensions
+              ];
+            })
+            userList
+        );
+    };
 }

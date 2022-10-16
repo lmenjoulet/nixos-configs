@@ -33,9 +33,10 @@
             (import ./modules/transmission.nix { download-dir = "/mnt/data/Torrents"; })
             ./modules/cuda.nix
             ./hardware/babel.nix
-            ./modules/kde.nix
+            ./modules/gnome.nix
             ./modules/steam.nix
             ./modules/wifi-key-tplink.nix
+            ./modules/gns3.nix
             ({ config, pkgs, ... }: {
               networking.hostName = "babel";
               nixpkgs.overlays = [ blender-bin.overlays.default ];

@@ -33,7 +33,7 @@
       gnome-firmware
       gnome.gnome-tweaks
       ffmpegthumbnailer
-    ];
+    ] ++ (import ./gnome-extensions.nix pkgs);
 
   };
 
