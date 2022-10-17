@@ -9,7 +9,6 @@
   };
   nixpkgs.config.allowUnfree = true;
 
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
   networking = {
     networkmanager.enable = true;
   };

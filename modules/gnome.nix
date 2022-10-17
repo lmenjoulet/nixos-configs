@@ -17,6 +17,7 @@
     gnome.excludePackages = (with pkgs; [
       gnome-photos
       gnome-tour
+      gnome-console
     ]) ++ (with pkgs.gnome; [
       gnome-music
       epiphany
@@ -33,6 +34,7 @@
       gnome-firmware
       gnome.gnome-tweaks
       ffmpegthumbnailer
+      blackbox-terminal
     ] ++ (import ./gnome-extensions.nix pkgs);
 
   };
