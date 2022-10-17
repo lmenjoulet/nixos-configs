@@ -119,11 +119,12 @@
         toggleterm-nvim
       ];
       extraConfig = "lua << EOF\n" + builtins.readFile ./init.lua + "\nEOF";
-      extraPackages = [
-        pkgs.rnix-lsp
-        pkgs.nodePackages.bash-language-server
-        pkgs.sumneko-lua-language-server
-        pkgs.texlab
+      extraPackages = with pkgs; [
+        rnix-lsp
+        nodePackages.bash-language-server
+        sumneko-lua-language-server
+        ltex-ls
+        rust-analyzer
       ];
     };
 

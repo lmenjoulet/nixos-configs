@@ -71,7 +71,8 @@ require("lualine").setup({
 local lsp_servers = {
   [[bashls]],
   [[rnix]],
-  [[texlab]],
+  [[ltex]],
+  [[rust_analyzer]],
   [[sumneko_lua]]
 }
 
