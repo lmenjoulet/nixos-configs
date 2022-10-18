@@ -33,7 +33,7 @@
             (import ./modules/transmission.nix { download-dir = "/mnt/data/Torrents"; })
             ./modules/cuda.nix
             ./hardware/babel.nix
-            ./modules/gnome.nix
+            ./modules/kde.nix
             ./modules/steam.nix
             ./modules/wifi-key-tplink.nix
             ./modules/gns3.nix
