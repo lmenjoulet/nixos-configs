@@ -34,6 +34,7 @@
       gnome-firmware
       gnome.gnome-tweaks
       ffmpegthumbnailer
+      fragments
       blackbox-terminal
     ] ++ (import ./gnome-extensions.nix pkgs);
 

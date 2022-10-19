@@ -22,7 +22,6 @@
       neofetch
       signal-desktop
       texlive.combined.scheme-medium
-      transmission-gtk
       conda
     ];
   };

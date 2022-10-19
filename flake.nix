@@ -50,7 +50,7 @@
             ./modules/transmission.nix
             ./hardware/icare.nix
             ./modules/cuda.nix
-            ./modules/gnome.nix
+            ./modules/kde.nix
             ./modules/nvidia-offload.nix
             ({ pkgs, ... }: {
               networking.hostName = "icare";

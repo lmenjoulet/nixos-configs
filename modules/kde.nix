@@ -2,7 +2,7 @@
   #programs.dconf.enable = true;
   services.xserver = {
     enable = true;
-    displayManager.lightdm.enable = true;
+    displayManager.sddm.enable = true;
     desktopManager.plasma5 = {
       enable = true;
       excludePackages = with pkgs.libsForQt5; [
@@ -11,17 +11,26 @@
       ];
     };
   };
-  environment.systemPackages = with pkgs; [
-    libsForQt5.kalendar
-    libsForQt5.kmail
-    strawberry
-    vlc
-    libsForQt5.kdepim-addons
-    libsForQt5.kdepim-runtime
-    libsForQt5.ark
-    libsForQt5.kclock
-    libsForQt5.kcalc
-  ];
+  environment = {
+    sessionVariables = {
+      GTK_USE_PORTAL = "1";
+    };
+
+    systemPackages = with pkgs; [
+      libsForQt5.kalendar
+      thunderbird
+      strawberry
+      transmission-qt
+      vlc
+      libsForQt5.kdepim-addons
+      libsForQt5.kdepim-runtime
+      libsForQt5.ark
+      libsForQt5.kclock
+      libsForQt5.kcalc
+      kde-gruvbox
+    ];
+  };
+  programs.kdeconnect.enable = true;
   security.wrappers = {
     plasma-systemmonitor = {
       owner = "root";
