@@ -19,6 +19,7 @@
       htop
       keepassxc
       libreoffice
+      minecraft
       neofetch
       signal-desktop
       texlive.combined.scheme-medium

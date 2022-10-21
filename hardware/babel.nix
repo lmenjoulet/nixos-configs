@@ -10,7 +10,7 @@
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "nvidia" ];
   boot.kernelModules = [ "kvm-amd" "k10temp" "lm92" ];
   boot.extraModulePackages = [ ];
 
@@ -37,6 +37,7 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware = {
     nvidia.modesetting.enable = true;
+    nvidia.powerManagement.enable = true;
     opengl = {
       enable = true;
       extraPackages = with pkgs; [
