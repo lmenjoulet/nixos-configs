@@ -11,5 +11,6 @@
     "dialout"
     "uucp"
     "networkmanager"
+    "libvirtd"
   ];
 }
