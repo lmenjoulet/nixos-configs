@@ -6,7 +6,6 @@
     ubridge
     dynamips
     vpcs
-    wireshark
     inetutils
   ];
   security.wrappers.ubridge = {

@@ -13,11 +13,32 @@ in
 
   home-manager =
     let
-      gnomeExtensions =
+      gnomeConfig =
         if config.services.xserver.desktopManager.gnome.enable
         then
           {
-            dconf.settings."org/gnome/shell".enabled-extensions = builtins.map (x: x.extensionUuid) (import ../modules/gnome-extensions.nix pkgs);
+            dconf.settings = {
+              "org/gnome/shell" = {
+                enabled-extensions = builtins.map (x: x.extensionUuid) (import ../modules/gnome-extensions.nix pkgs);
+              };
+            };
+            gtk = {
+              enable = true;
+              cursorTheme.name = "Adwaita";
+              font = {
+                package = pkgs.noto-fonts;
+                name = "Noto Sans";
+              };
+              iconTheme = {
+                package = pkgs.papirus-icon-theme;
+                name = "Papirus-Dark";
+              };
+              theme = {
+                package = pkgs.adw-gtk3;
+                name = "adw-gtk3-dark";
+              };
+
+            };
           }
         else
           { };
@@ -33,7 +54,7 @@ in
               name = user;
               value = lib.mkMerge [
                 (import (./. + "/${user}/home-manager.nix"))
-                gnomeExtensions
+                gnomeConfig
               ];
             })
             userList
