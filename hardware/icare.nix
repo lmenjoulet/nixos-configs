@@ -12,6 +12,7 @@
   boot =
     {
       kernelModules = [ "kvm-intel" ];
+      kernelPackages = pkgs.linuxPackages_latest;
       kernelParams = [
         "intel_iommu=on"
       ];
