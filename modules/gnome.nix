@@ -25,12 +25,14 @@
       gnome-maps
       yelp
       gnome-backgrounds
+      gnome-system-monitor
     ]);
 
     systemPackages = with pkgs; [
       libsForQt5.qtstyleplugins
       amberol
       celluloid
+      newsflash
       gnome-firmware
       gnome.gnome-tweaks
       ffmpegthumbnailer
