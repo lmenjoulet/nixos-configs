@@ -19,6 +19,11 @@
       htop
       keepassxc
       libreoffice
+      (lutris.override {
+        extraLibraries = pkgs: [
+          jansson
+        ];
+      })
       minecraft
       neofetch
       signal-desktop
