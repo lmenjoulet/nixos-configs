@@ -49,9 +49,10 @@
           modules = [
             ./programs/transmission.nix
             ./machines/icare.nix
-            ./hardware/cuda.nix
+            #./hardware/cuda.nix
             ./desktop-environments/gnome.nix
             ./hardware/nvidia-offload.nix
+            ./programs/zsh.nix
             ({ pkgs, ... }: {
               networking.hostName = "icare";
               nixpkgs.overlays = [ blender-bin.overlays.default ];
