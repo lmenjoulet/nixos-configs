@@ -5,11 +5,13 @@ let
   );
 in
 {
-  users.users = builtins.listToAttrs (
-    builtins.map
-      (user: { name = user; value = (import (./. + "/${user}/user.nix")); })
-      userList
-  );
+  users = {
+    users = builtins.listToAttrs (
+      builtins.map
+        (user: { name = user; value = (import (./. + "/${user}/user.nix")); })
+        userList
+    );
+  };
 
   home-manager =
     let
@@ -19,7 +21,7 @@ in
           {
             dconf.settings = {
               "org/gnome/shell" = {
-                enabled-extensions = builtins.map (x: x.extensionUuid) (import ../modules/gnome-extensions.nix pkgs);
+                enabled-extensions = builtins.map (x: x.extensionUuid) (import ../desktop-environments/gnome-extensions.nix pkgs);
               };
             };
             gtk = {

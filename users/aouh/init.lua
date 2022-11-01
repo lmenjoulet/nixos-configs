@@ -95,6 +95,33 @@ for _, lsp_server in pairs(lsp_servers) do
   )
 end
 
+-- Custom spell check config
+
+local dico_location = os.getenv("HOME").."/Documents/Ressources/vim-dictionnaire.add"
+
+vim.cmd([[set spellfile=]] .. dico_location) -- self explanatory
+lspconfig.ltex.setup {
+  root_dir = function()
+    return vim.loop.cwd()
+  end,
+  settings = {
+    ltex = {
+      language = "fr",
+      completionEnabled = true,
+      dictionary = {
+        ["fr"] = (function()
+          local dictionary = {}
+          for line in io.lines(dico_location) do
+            table.insert(dictionary, line)
+          end
+          return dictionary
+        end)()
+      }
+    }
+  }
+}
+
+
 lspconfig.sumneko_lua.setup {
   root_dir = function()
     return vim.loop.cwd()
@@ -131,16 +158,16 @@ vim.api.nvim_create_autocmd(
   "BufWritePre",
   {
     pattern = "*",
-    callback = vim.lsp.buf.formatting_sync
+    callback = vim.lsp.buf.format
   }
 )
 
--- spell checking and length wrapping for text files
+-- length wrapping for text files
 
 vim.api.nvim_create_autocmd(
   "BufEnter",
   {
     pattern = { "*.txt", "*.tex", "*.md" },
-    command = [[set spell spelllang=en_us,fr tw=80 fo+=t fo-=l]]
+    command = [[set tw=80 fo+=t fo-=l]]
   }
 )

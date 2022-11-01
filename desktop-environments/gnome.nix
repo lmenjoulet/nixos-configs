@@ -32,6 +32,7 @@
       libsForQt5.qtstyleplugins
       amberol
       celluloid
+      dialect
       newsflash
       gnome-firmware
       gnome.gnome-tweaks

@@ -19,11 +19,6 @@
       htop
       keepassxc
       libreoffice
-      (lutris.override {
-        extraLibraries = pkgs: [
-          jansson
-        ];
-      })
       minecraft
       neofetch
       signal-desktop
@@ -131,30 +126,6 @@
         ltex-ls
         rust-analyzer
       ];
-    };
-
-    vscode = {
-      enable = true;
-      extensions = with pkgs.vscode-extensions; [
-        # only cosmetic and interface
-        vscodevim.vim
-        mhutchie.git-graph
-        jdinhlife.gruvbox
-        tomoki1207.pdf
-        ms-ceintl.vscode-language-pack-fr
-      ];
-      userSettings = {
-        "editor.tabSize" = 2;
-        "editor.insertSpaces" = true;
-        "editor.detectIndentation" = false;
-        "editor.lineNumbers" = "relative";
-        "editor.fontFamily" = "Fira Code";
-        "editor.cursorSurroundingLines" = 999;
-        "workbench.iconTheme" = "vscode-icons";
-        "workbench.colorTheme" = "Gruvbox Dark Hard";
-        "svelte.enable-ts-plugin" = true;
-        "vsicons.dontShowNewVersionMessage" = true;
-      };
     };
   };
 }

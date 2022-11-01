@@ -17,9 +17,9 @@
         common-basic =
           [
             ./configuration.nix
-            ./modules/grub.nix
-            ./modules/security.nix
-            ./modules/pipewire.nix
+            ./hardware/grub.nix
+            ./hardware/fwupd.nix
+            ./hardware/pipewire.nix
             ./users/configuration.nix
             home-manager.nixosModules.home-manager
           ];
@@ -30,13 +30,13 @@
         babel = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            (import ./modules/transmission.nix { download-dir = "/mnt/data/Torrents"; })
-            ./modules/cuda.nix
-            ./hardware/babel.nix
-            ./modules/gnome.nix
-            ./modules/steam.nix
-            ./modules/wifi-key-tplink.nix
-            ./modules/gns3.nix
+            (import ./programs/transmission.nix { download-dir = "/mnt/data/Torrents"; })
+            #./hardware/cuda.nix
+            ./machines/babel.nix
+            ./desktop-environments/gnome.nix
+            ./programs/steam.nix
+            ./programs/gns3.nix
+            ./programs/zsh.nix
             ({ config, pkgs, ... }: {
               networking.hostName = "babel";
               nixpkgs.overlays = [ blender-bin.overlays.default ];
@@ -47,11 +47,11 @@
         icare = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            ./modules/transmission.nix
-            ./hardware/icare.nix
-            ./modules/cuda.nix
-            ./modules/gnome.nix
-            ./modules/nvidia-offload.nix
+            ./programs/transmission.nix
+            ./machines/icare.nix
+            ./hardware/cuda.nix
+            ./desktop-environments/gnome.nix
+            ./hardware/nvidia-offload.nix
             ({ pkgs, ... }: {
               networking.hostName = "icare";
               nixpkgs.overlays = [ blender-bin.overlays.default ];
