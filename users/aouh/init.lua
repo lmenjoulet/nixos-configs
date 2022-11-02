@@ -99,30 +99,32 @@ end
 
 local dico_location = os.getenv("HOME").."/Documents/Ressources/vim-dictionnaire.add"
 
-vim.cmd([[set spellfile=]] .. dico_location) -- self explanatory
+vim.cmd([[set spellfile=]] .. dico_location) 
+vim.cmd([[set spelllang=fr]])
 lspconfig.ltex.setup {
-  root_dir = function()
-    return vim.loop.cwd()
-  end,
-  settings = {
-    ltex = {
-      language = "fr",
-      completionEnabled = true,
-      dictionary = {
-        ["fr"] = (function()
-          local dictionary = {}
-          for line in io.lines(dico_location) do
-            table.insert(dictionary, line)
-          end
-          return dictionary
-        end)()
+    root_dir = function()
+      return vim.loop.cwd()
+    end,
+    settings = {
+      ltex = {
+        language = "fr",
+        completionEnabled = true,
+        dictionary = {
+          ["fr"] = (function(file)
+            local dict = {}
+            for line in io.lines(file) do
+              table.insert(dict, line)
+            end
+            return dict
+          end)(dico_location)
+        }
       }
-    }
   }
 }
 
 
 lspconfig.sumneko_lua.setup {
+  coq.lsp_ensure_capabilities {
   root_dir = function()
     return vim.loop.cwd()
   end,
@@ -143,6 +145,7 @@ lspconfig.sumneko_lua.setup {
       },
     }
   }
+}
 }
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(

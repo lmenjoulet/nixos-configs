@@ -19,10 +19,10 @@
       gnome-tour
       gnome-console
     ]) ++ (with pkgs.gnome; [
-      gnome-music
       epiphany
       totem
       gnome-maps
+      gnome-music
       yelp
       gnome-backgrounds
       gnome-system-monitor
@@ -30,7 +30,6 @@
 
     systemPackages = with pkgs; [
       libsForQt5.qtstyleplugins
-      amberol
       celluloid
       dialect
       newsflash
@@ -38,6 +37,7 @@
       gnome.gnome-tweaks
       ffmpegthumbnailer
       fragments
+      lollypop
       blackbox-terminal
     ] ++ (import ./gnome-extensions.nix pkgs);
 

@@ -39,6 +39,7 @@
             ./programs/zsh.nix
             ({ config, pkgs, ... }: {
               networking.hostName = "babel";
+              nix.registry.nixpkgs.flake = nixpkgs;
               nixpkgs.overlays = [ blender-bin.overlays.default ];
             })
           ]
@@ -55,6 +56,7 @@
             ./programs/zsh.nix
             ({ pkgs, ... }: {
               networking.hostName = "icare";
+              nix.registry.nixpkgs.flake = nixpkgs;
               nixpkgs.overlays = [ blender-bin.overlays.default ];
             })
           ] ++ profiles.common-basic;
