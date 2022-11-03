@@ -72,6 +72,7 @@ local lsp_servers = {
   [[bashls]],
   [[rnix]],
   [[ltex]],
+  [[erlangls]],
   [[rust_analyzer]],
   [[sumneko_lua]]
 }
@@ -124,7 +125,6 @@ lspconfig.ltex.setup {
 
 
 lspconfig.sumneko_lua.setup {
-  coq.lsp_ensure_capabilities {
   root_dir = function()
     return vim.loop.cwd()
   end,
@@ -145,7 +145,6 @@ lspconfig.sumneko_lua.setup {
       },
     }
   }
-}
 }
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(

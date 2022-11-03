@@ -125,6 +125,7 @@
         sumneko-lua-language-server
         ltex-ls
         rust-analyzer
+        erlang-ls
       ];
     };
   };
