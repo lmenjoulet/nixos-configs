@@ -39,7 +39,19 @@
     };
 
   swapDevices = [ ];
-
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware = {
+    nvidia.modesetting.enable = true;
+    nvidia.powerManagement.enable = true;
+    opengl = {
+      enable = true;
+      extraPackages = with pkgs; [
+        vaapiVdpau
+        libvdpau-va-gl
+        libva-utils
+      ];
+    };
+  };
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
