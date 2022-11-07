@@ -120,10 +120,12 @@
       ];
       extraConfig = "lua << EOF\n" + builtins.readFile ./init.lua + "\nEOF";
       extraPackages = with pkgs; [
+        universal-ctags
         rnix-lsp
         nodePackages.bash-language-server
         sumneko-lua-language-server
         ltex-ls
+        texlab
         rust-analyzer
         erlang-ls
       ];

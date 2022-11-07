@@ -8,7 +8,7 @@ vim.o.cursorline = true -- hightlight the line where the cursor is
 vim.o.splitright = true -- open new buffer right half of the terminal
 vim.o.scrolloff = 999 -- center cursor
 vim.o.relativenumber = true -- show relative line number
-
+vim.o.signcolumn = [[yes]] -- 
 vim.o.background = [[dark]] -- self explanatory
 vim.cmd([[colorscheme gruvbox]]) -- self explanatory
 
@@ -21,11 +21,14 @@ require([[nvim-treesitter.configs]]).setup {
 require([[telescope]]).setup {
   defaults = {
     initial_mode = [[normal]],
-    file_ignore_patterns = { [[.git/]], [[node_modules/]] },
+    file_ignore_patterns = { [[.git/]], [[node_modules/]], [[compilation_output/]] },
   },
   pickers = {
     find_files = {
       hidden = true,
+      initial_mode = [[insert]],
+    },
+    current_buffer_fuzzy_find = {
       initial_mode = [[insert]],
     }
   }
@@ -34,7 +37,9 @@ require([[telescope]]).setup {
 vim.keymap.set("n", "<Leader>ff", require("telescope.builtin").find_files, { noremap = true })
 vim.keymap.set("n", "<Leader>fo", require("telescope.builtin").oldfiles, { noremap = true })
 vim.keymap.set("n", "<Leader>fb", require("telescope.builtin").buffers, { noremap = true })
-vim.keymap.set("n", "<Leader>ft", require("telescope.builtin").treesitter, { noremap = true })
+vim.keymap.set("n", "<Leader>ft", require("telescope.builtin").current_buffer_fuzzy_find, { noremap = true })
+vim.keymap.set("n", "<Leader>fe", require("telescope.builtin").diagnostics, { noremap = true })
+vim.keymap.set("n", "<Leader>fw", require("telescope.builtin").spell_suggest, { noremap = true })
 
 require([[gitsigns]]).setup {
   current_line_blame = true;
@@ -72,6 +77,7 @@ local lsp_servers = {
   [[bashls]],
   [[rnix]],
   [[ltex]],
+  [[texlab]],
   [[erlangls]],
   [[rust_analyzer]],
   [[sumneko_lua]]
@@ -84,7 +90,12 @@ vim.g.coq_settings = {
       mode = [[none]]
     }
   },
-  xdg = true
+  xdg = true,
+  clients = {
+    buffers = {
+      enabled = false,
+    },
+  },
 }
 
 local lspconfig = require([[lspconfig]])
@@ -96,12 +107,13 @@ for _, lsp_server in pairs(lsp_servers) do
   )
 end
 
--- Custom spell check config
+-- Custom spell check and latex config
 
 local dico_location = os.getenv("HOME").."/Documents/Ressources/vim-dictionnaire.add"
 
-vim.cmd([[set spellfile=]] .. dico_location) 
+vim.cmd([[set spellfile=]] .. dico_location)
 vim.cmd([[set spelllang=fr]])
+
 lspconfig.ltex.setup {
     root_dir = function()
       return vim.loop.cwd()
@@ -123,6 +135,23 @@ lspconfig.ltex.setup {
   }
 }
 
+lspconfig.texlab.setup {
+  settings = {
+    texlab = {
+      rootDirectory = vim.loop.cwd(),
+      auxDir = "compilation_output",
+      build = {
+        onSave = true,
+        args = {
+          "-pdf",
+          "-outdir=compilation_output",
+          "-bibtexfudge-",
+          "%f",
+        }
+      }
+    }
+  }
+}
 
 lspconfig.sumneko_lua.setup {
   root_dir = function()
