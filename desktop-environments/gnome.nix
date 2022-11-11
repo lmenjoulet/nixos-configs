@@ -35,10 +35,10 @@
       newsflash
       gnome-firmware
       gnome.gnome-tweaks
+      gnome.gnome-terminal
       ffmpegthumbnailer
       fragments
       lollypop
-      blackbox-terminal
     ] ++ (import ./gnome-extensions.nix pkgs);
 
   };

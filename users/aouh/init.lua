@@ -1,6 +1,7 @@
 vim.g.mapleader = [[;]]
 vim.o.number = true -- show line number
 vim.opt.termguicolors = true -- better colors
+vim.o.laststatus = 3
 vim.o.tabstop = 2 -- tab size 2
 vim.o.shiftwidth = 0 -- indent size
 vim.o.expandtab = true -- convert tab to spaces
@@ -41,12 +42,17 @@ vim.keymap.set("n", "<Leader>ft", require("telescope.builtin").current_buffer_fu
 vim.keymap.set("n", "<Leader>fe", require("telescope.builtin").diagnostics, { noremap = true })
 vim.keymap.set("n", "<Leader>fw", require("telescope.builtin").spell_suggest, { noremap = true })
 
+-- Git integration
 require([[gitsigns]]).setup {
   current_line_blame = true;
   current_line_blame_opts = {
     delay = 400,
   },
 }
+
+require([[diffview]]).setup ({
+  use_icons = false;
+})
 
 require([[nvim-autopairs]]).setup {
   ignored_next_char = "[^%s%]%)%}]"
@@ -66,17 +72,17 @@ require("lualine").setup({
     section_separators = { left = "", right = "" },
   },
   sections = {
-    lualine_c = { "lsp_progress" }
+    lualine_c = { "lsp_progress" },
+    lualine_x = { "buffers" },
+    lualine_y = { { "filename", path = 1 } }
   },
-  inactive_sections = {
-    lualine_c = {}
-  }
 })
 
 local lsp_servers = {
   [[bashls]],
   [[rnix]],
   [[ltex]],
+  [[quick_lint_js]],
   [[texlab]],
   [[erlangls]],
   [[rust_analyzer]],

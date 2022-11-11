@@ -27,7 +27,7 @@
     };
   };
   fonts.fonts = with pkgs; [
-    fira-code
+    terminus_font
   ];
   system.stateVersion = "22.11";
 

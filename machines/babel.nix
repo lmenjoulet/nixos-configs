@@ -8,12 +8,17 @@
     [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
-
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ "nvidia" ];
-  boot.kernelModules = [ "kvm-amd" "k10temp" "lm92" ];
-  boot.extraModulePackages = [ ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+ 
+  boot = {
+    initrd = {
+      availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
+      kernelModules = [ "nvidia" ];
+    };
+    kernelModules = [ "kvm-amd" "k10temp" "lm92" ];
+    kernelPackages = pkgs.linuxPackages;
+    blacklistedKernelModules = [ "r8188eu" ];
+    extraModulePackages = [ config.boot.kernelPackages.rtl8188eus-aircrack ];
+  };
 
   fileSystems."/" =
     {

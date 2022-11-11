@@ -24,6 +24,7 @@
       signal-desktop
       texlive.combined.scheme-medium
       conda
+      nodePackages.web-ext
     ];
   };
 
@@ -34,14 +35,6 @@
   };
 
   programs = {
-
-    bash = {
-      enable = true;
-      sessionVariables = {
-        EDITOR = "nvim";
-      };
-    };
-
     beets = {
       enable = true;
       settings = {
@@ -100,7 +93,44 @@
 
     gh.enable = true;
 
-    go.enable = true;
+    gnome-terminal = {
+      enable = true;
+      profile = {
+        "5ddfe964-7ee6-4131-b449-26bdd97518f7" = {
+          audibleBell = false;
+          default = true;
+          visibleName = "Gruvbox";
+          cursorShape = "block";
+          cursorBlinkMode = "on";
+          font = "Terminus 10";
+          showScrollbar = false;
+          colors = {
+            foregroundColor = "rgb(197,200,198)";
+            backgroundColor = "rgb(40,40,40)";
+            palette = [
+              "rgb(40,40,40)"
+              "rgb(204,36,29)"
+              "rgb(152,151,26)"
+              "rgb(215,153,33)"
+              "rgb(69,133,136)"
+              "rgb(177,98,134)"
+              "rgb(104,157,106)"
+              "rgb(168,153,132)"
+              "rgb(146,131,116)"
+              "rgb(251,73,52)"
+              "rgb(184,187,38)"
+              "rgb(250,189,47)"
+              "rgb(131,165,152)"
+              "rgb(211,134,155)"
+              "rgb(142,192,124)"
+              "rgb(235,219,178)"
+            ];
+          };
+        };
+      };
+      showMenubar = false;
+      themeVariant = "default";
+    };
 
     neovim = {
       enable = true;
@@ -117,10 +147,13 @@
         plenary-nvim
         telescope-nvim
         toggleterm-nvim
+        diffview-nvim
+        alpha-nvim
       ];
       extraConfig = "lua << EOF\n" + builtins.readFile ./init.lua + "\nEOF";
       extraPackages = with pkgs; [
         universal-ctags
+        quick-lint-js
         rnix-lsp
         nodePackages.bash-language-server
         sumneko-lua-language-server
