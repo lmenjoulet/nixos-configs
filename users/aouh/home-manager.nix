@@ -148,7 +148,8 @@
         telescope-nvim
         toggleterm-nvim
         diffview-nvim
-        alpha-nvim
+        alpha-nvim 
+        project-nvim
       ];
       extraConfig = "lua << EOF\n" + builtins.readFile ./init.lua + "\nEOF";
       extraPackages = with pkgs; [

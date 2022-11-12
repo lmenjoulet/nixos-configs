@@ -19,6 +19,12 @@ require([[nvim-treesitter.configs]]).setup {
   };
 }
 
+-- Session/project manager
+
+require("project_nvim").setup {}
+
+-- Telescope
+
 require([[telescope]]).setup {
   defaults = {
     initial_mode = [[normal]],
@@ -35,13 +41,76 @@ require([[telescope]]).setup {
   }
 }
 
+require('telescope').load_extension('projects')
+
+
 vim.keymap.set("n", "<Leader>ff", require("telescope.builtin").find_files, { noremap = true })
 vim.keymap.set("n", "<Leader>fo", require("telescope.builtin").oldfiles, { noremap = true })
 vim.keymap.set("n", "<Leader>fb", require("telescope.builtin").buffers, { noremap = true })
 vim.keymap.set("n", "<Leader>ft", require("telescope.builtin").current_buffer_fuzzy_find, { noremap = true })
 vim.keymap.set("n", "<Leader>fe", require("telescope.builtin").diagnostics, { noremap = true })
 vim.keymap.set("n", "<Leader>fw", require("telescope.builtin").spell_suggest, { noremap = true })
+vim.keymap.set("n", "<Leader>fp", require("telescope").extensions.projects.projects, { noremap = true })
 
+
+-- Start Menu
+
+local dashboard = require("alpha.themes.dashboard");
+
+dashboard.text = function (txt, hl_group, position)
+  return {
+    type = "text",
+    val = txt,
+    opts = {
+      hl = hl_group,
+      position = position
+    };
+  }
+end;
+
+dashboard.section.header.val = {
+  "                    (//////                    ",
+  "                  .((((/////                   ",
+  "                 (((((((//////                 ",
+  "                (((((((((//////                ",
+  "              ((((((*((((((//////              ",
+  "             ((((((****(((((//////             ",
+  "           ((((((****** ((((((//////           ",
+  "          ((((((*****    ((((((//////          ",
+  "        ((((((******       ((((((//////        ",
+  "       ((((((*****/         ((((((//////       ",
+  "     ((((((******   NEOVIM    (((((//////      ",
+  "    ((((((******               ((((((//////    ",
+  "   ((((((*****//////////////////////////////   ",
+  " ((((((******///////////////////////////////// ",
+  "((((((*****************************************",
+  " ((*****************************************   ",
+  "  (**************************************      ",
+}
+
+dashboard.section.buttons.val = {
+    dashboard.text("=====================================================", "GruvboxAqua", "center"),
+    dashboard.button("e", "|>   New file", ":enew <CR>"),
+    dashboard.button("t", "|>   Open terminal", ":ToggleTerm<CR>"),
+    dashboard.button("p", "|>   Open Project", ":Telescope projects<CR>"),
+    dashboard.button("q", "|>   Quit", ":qa<CR>")
+};
+
+
+dashboard.section.footer.type = "group";
+
+dashboard.section.footer.val = {
+  dashboard.text("=====================================================", "GruvboxAqua", "center"),
+  dashboard.text("Do you think aliens watch us boil water all day while", "GruvboxFg4",  "center"),
+  dashboard.text("searching for new ways to boil even more water and   ", "GruvboxFg4",  "center"),
+  dashboard.text("just laugh at how fucking shit we are?               ", "GruvboxFg4",  "center"),
+  dashboard.text(">*puts pan of water on stove*                        ", "GruvboxGreen","center"),
+  dashboard.text(">look at me, I'm a human!                            ", "GruvboxGreen","center"),
+  dashboard.text("                                               - Anon", "GruvboxFg4",  "center"),
+  dashboard.text("=====================================================", "GruvboxAqua", "center"),
+}
+
+require("alpha").setup(dashboard.opts)
 -- Git integration
 require([[gitsigns]]).setup {
   current_line_blame = true;
