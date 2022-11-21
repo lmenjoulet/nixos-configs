@@ -37,6 +37,7 @@
             ./programs/steam.nix
             ./programs/gns3.nix
             ./programs/zsh.nix
+            ./hardware/android.nix
             ({ config, pkgs, ... }: {
               networking.hostName = "babel";
               nix.registry.nixpkgs.flake = nixpkgs;

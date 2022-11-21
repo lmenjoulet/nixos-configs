@@ -36,8 +36,8 @@ in
                 name = "Papirus-Dark";
               };
               theme = {
-                package = pkgs.adw-gtk3;
-                name = "adw-gtk3-dark";
+                #package = pkgs.adw-gtk3;
+                name = "Adwaita-dark";
               };
 
             };

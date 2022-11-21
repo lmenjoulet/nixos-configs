@@ -1,5 +1,4 @@
 { pkgs, ... }: {
-
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -21,20 +20,51 @@
       libreoffice
       minecraft
       neofetch
+      ranger
       signal-desktop
       texlive.combined.scheme-medium
       conda
       nodePackages.web-ext
     ];
+
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
   };
 
   services = {
+    mpd = {
+      enable = true;
+      musicDirectory = "/home/aouh/Musique";
+      extraConfig = ''
+        audio_output {
+          type "pipewire"
+          name "Default Pipewire output"
+          remote "pipewire-0"
+        }
+
+        audio_output {
+          type    "fifo"
+          name    "fourier transform preview"
+          path    "/tmp/mpd.fifo"
+          format  "44100:16:2"
+        }
+      '';
+    };
+    mpdris2 = {
+      enable = true;
+      multimediaKeys = true;
+    };
+
     syncthing = {
       enable = true;
     };
   };
 
   programs = {
+
+    zsh.enable = true; # needed for session vars
+
     beets = {
       enable = true;
       settings = {
@@ -58,9 +88,8 @@
     firefox = {
       enable = true;
       package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
-        forceWayland = true;
         extraPolicies = {
-          CaptivePortal = false;
+          CaptivePortal = true;
           DisableFirefoxStudies = true;
           DisablePocket = true;
           DisableTelemetry = true;
@@ -76,7 +105,6 @@
             Highlights = false;
             Search = true;
           };
-
           UserMessaging = {
             ExtensionRecommendations = false;
             SkipOnboarding = true;
@@ -132,6 +160,38 @@
       themeVariant = "default";
     };
 
+    ncmpcpp = {
+      enable = true;
+      package = pkgs.ncmpcpp.override { visualizerSupport = true;};
+      bindings = [
+        { key = "t"; command = "find"; }
+        { key = "t"; command = "find_item_forward"; }
+        { key = "+"; command = "volume_up"; }
+        { key = "="; command = "volume_down"; }
+        { key = "j"; command = "scroll_down"; }
+        { key = "k"; command = "scroll_up"; }
+        { key = "ctrl-u"; command = "page_up"; }
+        { key = "ctrl-d"; command = "page_down"; }
+        { key = "h"; command = "previous_column"; }
+        { key = "l"; command = "next_column"; }
+        { key = "."; command = "show_lyrics"; }
+        { key = "n"; command = "next_found_item"; }
+        { key = "N"; command = "previous_found_item"; }
+        { key = "J"; command = "move_sort_order_down"; }
+        { key = "K"; command = "move_sort_order_up"; }
+        { key = "d"; command = "delete_playlist_items"; } 
+        { key = "space"; command = "pause"; } 
+      ];
+      settings = {
+        media_library_primary_tag = "album_artist";
+        visualizer_data_source = "/tmp/mpd.fifo";
+        visualizer_output_name = "fourier transform preview";
+        visualizer_in_stereo = "yes";
+        visualizer_type = "spectrum";
+        visualizer_look = "🞄|";
+      };
+    };
+
     neovim = {
       enable = true;
       plugins = with pkgs.vimPlugins; [
@@ -163,6 +223,12 @@
         rust-analyzer
         erlang-ls
       ];
+    };
+
+    tmux = {
+      enable = true;
+      clock24 = true;
+      keyMode = "vi";
     };
   };
 }

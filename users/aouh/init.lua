@@ -43,7 +43,6 @@ require([[telescope]]).setup {
 
 require('telescope').load_extension('projects')
 
-
 vim.keymap.set("n", "<Leader>ff", require("telescope.builtin").find_files, { noremap = true })
 vim.keymap.set("n", "<Leader>fo", require("telescope.builtin").oldfiles, { noremap = true })
 vim.keymap.set("n", "<Leader>fb", require("telescope.builtin").buffers, { noremap = true })
@@ -132,6 +131,9 @@ require([[toggleterm]]).setup {
   hide_numbers = true,
   start_in_insert = true,
   direction = [[float]],
+  float_opts = {
+    border = 'curved'
+  }
 }
 
 require("lualine").setup({

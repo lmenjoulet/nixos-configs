@@ -3,14 +3,14 @@
     xserver = {
       enable = true;
       displayManager.gdm.enable = true;
-      displayManager.gdm.wayland = lib.mkForce true;
+      displayManager.gdm.wayland = true;
       desktopManager.gnome.enable = true;
     };
   };
   qt5 = {
     enable = true;
-    style = lib.mkForce "gtk2";
-    platformTheme = lib.mkForce "gtk2";
+    style = lib.mkForce "adwaita-dark";
+    platformTheme = lib.mkForce "gnome";
   };
 
   environment = {
@@ -21,6 +21,7 @@
     ]) ++ (with pkgs.gnome; [
       epiphany
       totem
+      gnome-calculator
       gnome-maps
       gnome-music
       yelp
@@ -29,16 +30,20 @@
     ]);
 
     systemPackages = with pkgs; [
-      libsForQt5.qtstyleplugins
+      adwaita-qt
+      qgnomeplatform
       celluloid
       dialect
       newsflash
+      qalculate-gtk
       gnome-firmware
+      gnome.gnome-boxes
       gnome.gnome-tweaks
       gnome.gnome-terminal
       ffmpegthumbnailer
-      fragments
+      transmission-remote-gtk
       lollypop
+      sonata
     ] ++ (import ./gnome-extensions.nix pkgs);
 
   };
