@@ -5,6 +5,7 @@
       displayManager.gdm.enable = true;
       displayManager.gdm.wayland = true;
       desktopManager.gnome.enable = true;
+      windowManager.fluxbox.enable = true;
     };
   };
   qt5 = {

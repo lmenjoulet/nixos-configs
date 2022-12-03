@@ -12,6 +12,7 @@ vim.o.relativenumber = true -- show relative line number
 vim.o.signcolumn = [[yes]] -- 
 vim.o.background = [[dark]] -- self explanatory
 vim.cmd([[colorscheme gruvbox]]) -- self explanatory
+vim.api.nvim_set_hl(0, "Normal", {guibg = NONE, ctermbg = NONE}) -- background transparency
 
 require([[nvim-treesitter.configs]]).setup {
   highlight = {
@@ -128,7 +129,15 @@ require([[nvim-autopairs]]).setup {
 
 require([[toggleterm]]).setup {
   open_mapping = [[<Leader>t]],
-  hide_numbers = true,
+  shade_terminals = false;
+  highlights = {
+    Normal = {
+      guibg = "NONE",
+    },
+    NormalFloat = {
+      guibg = "NONE",
+    }
+  },
   start_in_insert = true,
   direction = [[float]],
   float_opts = {

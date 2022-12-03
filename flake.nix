@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-22.11;
     home-manager = {
       url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,9 +31,8 @@
           system = "x86_64-linux";
           modules = [
             (import ./programs/transmission.nix { download-dir = "/mnt/data/Torrents"; })
-            #./hardware/cuda.nix
             ./machines/babel.nix
-            ./desktop-environments/gnome.nix
+            ./xserver.nix
             ./programs/steam.nix
             ./programs/gns3.nix
             ./programs/zsh.nix

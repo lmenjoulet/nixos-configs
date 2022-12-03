@@ -3,6 +3,7 @@
   environment.shells = with pkgs; [ zsh ];
   programs.zsh = {
     enable = true;
+    enableBashCompletion = true;
     interactiveShellInit = ''
         source ${pkgs.grml-zsh-config}/etc/zsh/zshrc
         zstyle ':prompt:grml:right:setup' items
