@@ -175,31 +175,62 @@
               display_type = "memory";
               format_mem = "{mem_used_percents}";
               on_click = "urxvt -e zenith";
+              theme_overrides = {
+                idle_fg = "#D79921";
+              };
             }
             {
               block = "cpu";
               interval = 1;
               on_click = "urxvt -e zenith";
+              theme_overrides = {
+                idle_fg = "#D79921";
+              };
+
             }
-            { block = "sound"; }
+            {
+              block = "nvidia_gpu";
+              show_memory = false;
+              show_temperature = false;
+              label = "";
+              theme_overrides = {
+                idle_fg = "#D79921";
+              };
+            }
+            {
+              block = "sound";
+              theme_overrides = {
+                idle_fg = "#83A598";
+              };
+            }
             {
               block = "music"; 
               on_click = "urxvt -e ncmpcpp";
               marquee_interval = 2;
+              theme_overrides = {
+                idle_fg = "#458588";
+                info_fg = "#83A598";
+                info_bg = "#282828";
+              };
             }
             {
               block = "net";
-              format = "{ssid} {signal_strength} {ip} {speed_down;K*b} {graph_down:8;M*_b#50}";
+              format = "{ssid} {ip} {speed_down;K*b} {graph_down}";
+              hide_inactive = true;
               on_click = "urxvt -e nmtui";
+              theme_overrides = {
+                idle_fg = "#789D6A";
+              };
             }
             {
               block = "time";
-              interval = 60;
-              format = "%a %d/%m %R";
+              interval = 1;
+              locale = "fr_FR";
+              format = "%a %x %T";
             }
           ];
           theme = "gruvbox-dark";
-          icons = "awesome5";
+          icons = "awesome6";
           settings = {
             theme = {
               name = "gruvbox-dark";
