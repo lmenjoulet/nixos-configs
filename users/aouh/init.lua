@@ -11,8 +11,11 @@ vim.o.scrolloff = 999 -- center cursor
 vim.o.relativenumber = true -- show relative line number
 vim.o.signcolumn = [[yes]] -- 
 vim.o.background = [[dark]] -- self explanatory
+
 vim.cmd([[colorscheme gruvbox]]) -- self explanatory
-vim.api.nvim_set_hl(0, "Normal", {guibg = NONE, ctermbg = NONE}) -- background transparency
+
+vim.api.nvim_set_hl(0,"Normal", {guibg=NONE, ctermbg = NONE});
+vim.api.nvim_set_hl(0,"NormalFloat", {guibg=NONE, ctermbg = NONE});
 
 require([[nvim-treesitter.configs]]).setup {
   highlight = {
@@ -111,6 +114,7 @@ dashboard.section.footer.val = {
 }
 
 require("alpha").setup(dashboard.opts)
+
 -- Git integration
 require([[gitsigns]]).setup {
   current_line_blame = true;
@@ -129,15 +133,7 @@ require([[nvim-autopairs]]).setup {
 
 require([[toggleterm]]).setup {
   open_mapping = [[<Leader>t]],
-  shade_terminals = false;
-  highlights = {
-    Normal = {
-      guibg = "NONE",
-    },
-    NormalFloat = {
-      guibg = "NONE",
-    }
-  },
+  shade_terminals = false,
   start_in_insert = true,
   direction = [[float]],
   float_opts = {

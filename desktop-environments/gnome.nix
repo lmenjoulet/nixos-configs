@@ -2,10 +2,11 @@
   services = {
     xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
-      displayManager.gdm.wayland = true;
+      displayManager.gdm = {
+        enable = true;
+        wayland = true;
+      };
       desktopManager.gnome.enable = true;
-      windowManager.fluxbox.enable = true;
     };
   };
   qt5 = {
