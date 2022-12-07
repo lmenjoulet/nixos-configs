@@ -1,5 +1,4 @@
 { pkgs, ... }: {
-  #programs.dconf.enable = true;
   services.xserver = {
     enable = true;
     displayManager.sddm.enable = true;
@@ -17,17 +16,11 @@
     };
 
     systemPackages = with pkgs; [
-      libsForQt5.kalendar
       thunderbird
       strawberry
       transmission-qt
+      qalculate-qt
       vlc
-      libsForQt5.kdepim-addons
-      libsForQt5.kdepim-runtime
-      libsForQt5.ark
-      libsForQt5.kclock
-      libsForQt5.kcalc
-      kde-gruvbox
     ];
   };
   programs.kdeconnect.enable = true;

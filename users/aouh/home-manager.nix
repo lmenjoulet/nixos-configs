@@ -30,29 +30,6 @@
   };
   
   services = {
-    mpd = {
-      enable = true;
-      musicDirectory = "/home/aouh/Musique";
-      extraConfig = ''
-        audio_output {
-          type "pipewire"
-          name "Default Pipewire output"
-          remote "pipewire-0"
-        }
-
-        audio_output {
-          type    "fifo"
-          name    "fourier transform preview"
-          path    "/tmp/mpd.fifo"
-          format  "44100:16:2"
-        }
-      '';
-    };
-    mpdris2 = {
-      enable = true;
-      multimediaKeys = true;
-    };
-
     syncthing = {
       enable = true;
     };
@@ -114,38 +91,6 @@
     };
 
     gh.enable = true;
-        
-    ncmpcpp = {
-      enable = true;
-      package = pkgs.ncmpcpp.override { visualizerSupport = true;};
-      bindings = [
-        { key = "t"; command = "find"; }
-        { key = "t"; command = "find_item_forward"; }
-        { key = "+"; command = "volume_up"; }
-        { key = "="; command = "volume_down"; }
-        { key = "j"; command = "scroll_down"; }
-        { key = "k"; command = "scroll_up"; }
-        { key = "ctrl-u"; command = "page_up"; }
-        { key = "ctrl-d"; command = "page_down"; }
-        { key = "h"; command = "previous_column"; }
-        { key = "l"; command = "next_column"; }
-        { key = "."; command = "show_lyrics"; }
-        { key = "n"; command = "next_found_item"; }
-        { key = "N"; command = "previous_found_item"; }
-        { key = "J"; command = "move_sort_order_down"; }
-        { key = "K"; command = "move_sort_order_up"; }
-        { key = "d"; command = "delete_playlist_items"; } 
-        { key = "space"; command = "pause"; } 
-      ];
-      settings = {
-        media_library_primary_tag = "album_artist";
-        visualizer_data_source = "/tmp/mpd.fifo";
-        visualizer_output_name = "fourier transform preview";
-        visualizer_in_stereo = "yes";
-        visualizer_type = "spectrum";
-        visualizer_look = "🞄|";
-      };
-    };
 
     neovim = {
       enable = true;
@@ -177,53 +122,6 @@
       ];
     };
 
-    tmux = {
-      enable = true;
-      clock24 = true;
-      keyMode = "vi";
-    };
-    
-    alacritty = {
-      enable = true;
-      settings = {
-        window = {
-          opacity = 0.9;
-        };
-        font = {
-          normal = {
-            family = "Terminus";
-            style = "Regular";
-          };
-        };
-        colors = {
-          primary = {
-            background = "0x282828";
-            foreground = "0xebdbb2";
-          };
-          normal = {
-            black = "0x282828";
-            red = "0xcc241d";
-            green = "0x98971a";
-            yellow = "0xd79921";
-            blue = "0x458588";
-            magenta = "0xb16286";
-            cyan = "0x689d6a";
-            white = "0xa89984";
-          };
-          bright = {
-            black = "0x928374";
-            red = "0xfb4934";
-            green = "0xb8bb26";
-            yellow = "0xfabd2f";
-            blue = "0x83a598";
-            magenta = "0xd3869b";
-            cyan = "0x8ec07c";
-            white = "0xebdbb2";
-          };
-        };
-      };
-    };
-    
     yt-dlp = {
       enable = true;
       

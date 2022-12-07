@@ -32,7 +32,7 @@
           modules = [
             (import ./programs/transmission.nix { download-dir = "/mnt/data/Torrents"; })
             ./machines/babel.nix
-            ./desktop-environments/cinnamon.nix
+            ./desktop-environments/kde.nix
             ./programs/steam.nix
             ./programs/gns3.nix
             ./programs/zsh.nix
