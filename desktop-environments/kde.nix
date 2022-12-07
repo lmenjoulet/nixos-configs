@@ -32,4 +32,7 @@
       source = "${pkgs.libsForQt5.plasma-systemmonitor}/bin/plasma-systemmonitor";
     };
   };
+  fonts.fonts = with pkgs; [
+    fira-code
+  ];
 }
