@@ -12,12 +12,28 @@
   boot = {
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
-      kernelModules = [ "nvidia" ];
     };
+    loader = {
+      systemd-boot = {
+        enable = true;
+        consoleMode ="max";
+      };
+    };
+
     kernelModules = [ "kvm-amd" "k10temp" "lm92" ];
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
     blacklistedKernelModules = [ "r8188eu" ];
-    extraModulePackages = [ config.boot.kernelPackages.rtl8188eus-aircrack ];
+    extraModulePackages = [ (config.boot.kernelPackages.rtl8188eus-aircrack.overrideAttrs (finalAttrs: prevAttrs: {
+      src = pkgs.fetchFromGitHub {
+        owner = "aircrack-ng";
+        repo = "rtl8188eus";
+        rev = "f79dffb49b567a854c4f510a93a6d901caf63342";
+        sha256 = "0lzOcbQHDtXi1qh2O5fE8OR1aYFXUO09oE4y+QbGDMQ=";
+      };
+      patches = [];
+      meta.broken = false;
+      })
+    )];
   };
 
   fileSystems."/" =

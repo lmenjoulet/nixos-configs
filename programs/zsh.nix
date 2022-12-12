@@ -6,6 +6,10 @@
     enableBashCompletion = true;
     interactiveShellInit = ''
         source ${pkgs.grml-zsh-config}/etc/zsh/zshrc
+        
+        alias sudo="sudo env"
+        # dirty hack to patch sudo completion
+
         zstyle ':prompt:grml:right:setup' items
         function nix_shell_prompt (){
           REPLY=''${IN_NIX_SHELL+"(nix-shell) "}

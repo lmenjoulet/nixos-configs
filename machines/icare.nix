@@ -16,6 +16,12 @@
       kernelParams = [
         "intel_iommu=on"
       ];
+      loader = {
+        systemd-boot = {
+          enable = true;
+          consoleMode ="max";
+        };
+      };
       extraModulePackages = [ ];
       initrd = {
         kernelModules = [ ];

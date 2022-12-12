@@ -28,9 +28,7 @@
       xkbOptions = "eurosign:e";
     };
   };
-  fonts.fonts = with pkgs; [
-    terminus_font
-  ];
+  
   system.stateVersion = "22.11";
 
 }

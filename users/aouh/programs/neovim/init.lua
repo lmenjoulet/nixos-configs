@@ -1,6 +1,7 @@
 vim.g.mapleader = [[;]]
 vim.o.number = true -- show line number
 vim.opt.termguicolors = true -- better colors
+vim.opt.clipboard = [[unnamedplus]] -- clipboard os integration
 vim.o.laststatus = 3
 vim.o.tabstop = 2 -- tab size 2
 vim.o.shiftwidth = 0 -- indent size

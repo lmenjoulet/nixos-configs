@@ -16,11 +16,14 @@
     };
 
     systemPackages = with pkgs; [
+      sddm-kcm
       thunderbird
+      xclip
       strawberry
       transmission-qt
       qalculate-qt
       vlc
+      filelight
     ];
   };
   programs.kdeconnect.enable = true;
