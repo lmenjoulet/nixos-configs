@@ -21,6 +21,7 @@
           enable = true;
           consoleMode ="max";
         };
+	efi.canTouchEfiVariables = true;
       };
       extraModulePackages = [ ];
       initrd = {

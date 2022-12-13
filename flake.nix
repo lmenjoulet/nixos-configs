@@ -42,8 +42,8 @@
           modules = [
             ./programs/transmission.nix
             ./machines/icare.nix
-            ./hardware/cuda.nix
-            ./desktop-environments/gnome.nix
+            #./hardware/cuda.nix
+            ./desktop-environments/kde.nix
             ./hardware/nvidia-offload.nix
             ./programs/zsh.nix
             ./hardware/android.nix
