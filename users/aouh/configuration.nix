@@ -5,6 +5,7 @@
     ./programs/neovim/configuration.nix 
     ./programs/git.nix
     ./programs/konsole.nix
+    ./programs/touchegg.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

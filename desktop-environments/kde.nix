@@ -1,5 +1,7 @@
 { pkgs, ... }: {
-  services.xserver = {
+  services = {
+    touchegg.enable = true;
+    xserver = {
     enable = true;
     displayManager.sddm.enable = true;
     desktopManager.plasma5 = {
@@ -9,6 +11,7 @@
         plasma-browser-integration
       ];
     };
+  };
   };
   environment = {
     sessionVariables = {
