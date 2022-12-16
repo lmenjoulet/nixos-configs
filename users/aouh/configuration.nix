@@ -18,6 +18,7 @@
       #ciscoPacketTracer8
       ffmpeg
       flacon
+      joplin-desktop
       libsForQt5.kdenlive
       gimp-with-plugins
       keepassxc
