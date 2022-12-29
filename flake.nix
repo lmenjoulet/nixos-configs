@@ -23,6 +23,7 @@
             ./programs/steam.nix
             ./programs/gns3.nix
             ./programs/zsh.nix
+            ./programs/gpg.nix
             ./hardware/android.nix
             ./configuration.nix
             ./hardware/fwupd.nix
@@ -41,8 +42,8 @@
           system = "x86_64-linux";
           modules = [
             ./programs/transmission.nix
+            ./programs/gpg.nix
             ./machines/icare.nix
-            #./hardware/cuda.nix
             ./desktop-environments/kde.nix
             ./hardware/nvidia-offload.nix
             ./programs/zsh.nix

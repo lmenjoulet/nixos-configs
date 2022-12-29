@@ -20,6 +20,7 @@
 
     systemPackages = with pkgs; [
       sddm-kcm
+      ark
       thunderbird
       xclip
       strawberry
