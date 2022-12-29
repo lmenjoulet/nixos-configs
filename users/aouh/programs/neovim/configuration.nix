@@ -11,6 +11,7 @@
       coq-artifacts
       gitsigns-nvim
       gruvbox-nvim
+      numb-nvim
       lualine-lsp-progress
       lualine-nvim
       nvim-autopairs
@@ -29,6 +30,7 @@
       rnix-lsp
       sumneko-lua-language-server
       ltex-ls
+      nodePackages.typescript-language-server
       texlab
     ];
   };
