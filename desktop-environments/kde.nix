@@ -20,6 +20,7 @@
 
     systemPackages = with pkgs; [
       sddm-kcm
+      syncthingtray
       ark
       thunderbird
       xclip
@@ -30,7 +31,10 @@
       filelight
     ];
   };
-  programs.kdeconnect.enable = true;
+  programs = {
+    kdeconnect.enable = true;
+    partition-manager.enable = true;
+  };
   security.wrappers = {
     plasma-systemmonitor = {
       owner = "root";
