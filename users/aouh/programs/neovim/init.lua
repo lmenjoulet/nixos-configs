@@ -162,6 +162,7 @@ local lsp_servers = {
   [[quick_lint_js]],
   [[texlab]],
   [[erlangls]],
+  [[tsserver]],
   [[rust_analyzer]],
   [[sumneko_lua]]
 }
@@ -285,3 +286,7 @@ vim.api.nvim_create_autocmd(
     command = [[set tw=80 fo+=t fo-=l]]
   }
 )
+
+-- numb.nvim
+
+require('numb').setup { }
